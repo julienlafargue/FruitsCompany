@@ -1,0 +1,18 @@
+<!-- Motif "feuilles tropicales" en filigrane (texture d'ambiance).
+     Utilisé en fond répété des sections. Change stroke-opacity pour l'intensité. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <g fill="none" stroke="#00A551" stroke-width="1.4" stroke-opacity="0.05" stroke-linecap="round" stroke-linejoin="round">
+    <!-- feuille 1 -->
+    <path d="M30 25c26 4 33 34 12 58C18 62 16 39 30 25Z"/>
+    <path d="M30 25c4 22 8 40 12 58"/>
+    <!-- feuille 2 -->
+    <path d="M150 55c-24-6-46 12-44 40 26 4 47-13 44-40Z"/>
+    <path d="M150 55c-18 6-33 18-44 40"/>
+    <!-- feuille 3 -->
+    <path d="M60 150c-6-26 15-48 42-45 3 27-14 47-42 45Z"/>
+    <path d="M60 150c9-18 21-33 42-45"/>
+    <!-- feuille 4 -->
+    <path d="M170 165c-22 3-42-14-40-38 24-2 43 15 40 38Z"/>
+    <path d="M170 165c-15-6-28-18-40-38"/>
+  </g>
+</svg>
