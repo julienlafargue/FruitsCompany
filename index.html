@@ -59,7 +59,10 @@
     "description": "Mauritian exporter of fresh exotic fruits (Victoria pineapple, passion fruit), grown on its own farms in Mauritius.",
     "areaServed": "Worldwide",
     "knowsAbout": ["Exotic fruit export", "Victoria pineapple", "Passion fruit", "Pineapple farming", "Mauritius produce"],
-    "address": { "@type": "PostalAddress", "addressLocality": "Port Louis", "addressCountry": "MU" },
+    "address": { "@type": "PostalAddress", "streetAddress": "Sanashee Towers, Reserve Street", "addressLocality": "Port Louis", "addressCountry": "MU" },
+    "email": "chiagri_Mauritius@gmail.com",
+    "telephone": "+230 57803810",
+    "employee": { "@type": "Person", "name": "Jaysen Chinapyel", "jobTitle": "Director" },
     "makesOffer": {
       "@type": "Offer",
       "itemOffered": {
@@ -96,7 +99,10 @@
           <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 10.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8z"/><path d="M9 8l1.5-4"/><path d="M15 8l-1.5-4"/></svg></span>
           <span data-i18n="nav.products"></span>
         </a>
-        <a href="inquiry.html" class="btn btn-primary" data-i18n="nav.cta"></a>
+        <a href="inquiry.html">
+          <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+          <span data-i18n="nav.cta"></span>
+        </a>
       </nav>
       <div class="header-actions">
         <button class="lang-toggle" id="langToggle" aria-label="Switch language">FR</button>
@@ -117,15 +123,10 @@
       <svg class="hero-leaf leaf-1" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M96 4C40 9 9 40 4 96c0 0 28-4 49-25S96 30 96 4z"/><path stroke="rgba(255,255,255,.35)" stroke-width="2" fill="none" d="M18 82C40 60 62 38 88 14"/></svg>
       <svg class="hero-leaf leaf-2" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M96 4C40 9 9 40 4 96c0 0 28-4 49-25S96 30 96 4z"/><path stroke="rgba(255,255,255,.35)" stroke-width="2" fill="none" d="M18 82C40 60 62 38 88 14"/></svg>
 
-      <!-- Carte photo "plantation" (couche par-dessus le fond Maurice) -->
-      <figure class="hero-photo-card" aria-hidden="true">
-        <div class="hpc-img" id="heroCardImg"></div>
-        <figcaption class="hpc-cap" data-i18n="hero.cardCaption"></figcaption>
-      </figure>
-
       <div class="container">
         <!-- data-i18n-html : la traduction contient un <span> surligné (dégradé drapeau) -->
         <h1 data-i18n-html="hero.title"></h1>
+        <p class="hero-tagline" data-i18n="hero.tagline"></p>
         <div class="hero-actions">
           <a href="#products" class="btn btn-accent" data-i18n="hero.ctaPrimary"></a>
           <a href="inquiry.html" class="btn btn-ghost" data-i18n="hero.ctaSecondary"></a>
@@ -181,6 +182,10 @@
         <div class="contact-single reveal">
           <aside class="contact-info">
             <h3 data-i18n="contact.info.title"></h3>
+            <div class="info-item">
+              <div class="info-label" data-i18n="contact.info.personLabel"></div>
+              <span id="infoPerson"></span>
+            </div>
             <div class="info-item">
               <div class="info-label" data-i18n="contact.info.emailLabel"></div>
               <a id="infoEmail" href="#"></a>

@@ -27,15 +27,16 @@ const TRANSLATIONS = {
 
     // Hero
     "hero.title":    "Fresh <span class=\"grad\">Fruit</span> from the heart of the Indian Ocean",
+    "hero.tagline":  "Exporter of fresh exotic fruits",
     "hero.ctaPrimary":   "Discover our products",
     "hero.ctaSecondary": "Contact us",
     "hero.cardCaption":  "🌱 Our pineapple farm",
 
     // Statistiques
-    "stats.producers":     "Partner producers",
+    "stats.varieties":     "Exotic fruits",
     "stats.freshness":     "Harvest to dispatch",
-    "stats.varieties":     "Fruit & veg varieties",
-    "stats.traceability":  "Traceable, field to France",
+    "stats.ownfarms":      "Grown on our own farms",
+    "stats.traceability":  "Traceable to the plot",
 
     // À propos
     "about.kicker": "About us",
@@ -85,6 +86,7 @@ const TRANSLATIONS = {
     "contact.intro":  "Importer, wholesaler or distributor? Send us an inquiry.",
     "contact.sendInquiry": "Send an inquiry",
     "contact.info.title":     "Our contact details",
+    "contact.info.personLabel":  "Contact",
     "contact.info.emailLabel":   "Email",
     "contact.info.phoneLabel":   "Phone",
     "contact.info.addressLabel": "Address",
@@ -130,15 +132,16 @@ const TRANSLATIONS = {
 
     // Hero
     "hero.title":    "<span class=\"grad\">Fruits</span> frais venus du cœur de l'océan Indien",
+    "hero.tagline":  "Exportateur de fruits exotiques frais",
     "hero.ctaPrimary":   "Découvrir nos produits",
     "hero.ctaSecondary": "Nous contacter",
     "hero.cardCaption":  "🌱 Notre ferme d'ananas",
 
     // Statistiques
-    "stats.producers":     "Producteurs partenaires",
+    "stats.varieties":     "Fruits exotiques",
     "stats.freshness":     "De la récolte à l'expédition",
-    "stats.varieties":     "Variétés de fruits & légumes",
-    "stats.traceability":  "Traçable, du champ à la France",
+    "stats.ownfarms":      "Cultivés dans nos propres fermes",
+    "stats.traceability":  "Traçable jusqu'à la parcelle",
 
     // À propos
     "about.kicker": "À propos",
@@ -188,6 +191,7 @@ const TRANSLATIONS = {
     "contact.intro":  "Importateur, grossiste ou distributeur ? Envoyez-nous une demande.",
     "contact.sendInquiry": "Envoyer une demande",
     "contact.info.title":     "Nos coordonnées",
+    "contact.info.personLabel":  "Contact",
     "contact.info.emailLabel":   "Email",
     "contact.info.phoneLabel":   "Téléphone",
     "contact.info.addressLabel": "Adresse",

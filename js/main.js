@@ -131,7 +131,9 @@
   function buildLogo(container) {
     if (!container) return;
     container.innerHTML = "";
-    if (SITE_CONFIG.company.logoMode === "image") {
+    if (SITE_CONFIG.company.logoMode === "svg" && SITE_CONFIG.company.logoSvg) {
+      container.innerHTML = SITE_CONFIG.company.logoSvg;
+    } else if (SITE_CONFIG.company.logoMode === "image") {
       const img = document.createElement("img");
       img.src = SITE_CONFIG.company.logoImage;
       img.alt = SITE_CONFIG.company.name;
@@ -154,6 +156,7 @@
     const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     const setHref = (id, v) => { const el = document.getElementById(id); if (el) el.setAttribute("href", v); };
 
+    if (c.person) setText("infoPerson", c.role ? c.person + " · " + c.role : c.person);
     setText("infoEmail", c.email); setHref("infoEmail", "mailto:" + c.email);
     setText("infoPhone", c.phone); setHref("infoPhone", "tel:" + c.phone.replace(/\s+/g, ""));
     setText("infoAddress", c.addressMauritius);

@@ -10,22 +10,35 @@ const SITE_CONFIG = {
 
   /* --- Identité de l'entreprise ------------------------------------------ */
   company: {
-    // Nom AFFICHÉ (le logo). Astuce : le texte entre <b></b> est coloré (2 tons).
-    name: "Chi-<b>Agri</b>",
-    // Nom "brut" (sans HTML) — utilisé pour le SEO, l'email, le titre d'onglet.
+    name: "Chi-Agri",
     nameText: "Chi-Agri",
     tagline: "Exporter of fresh exotic fruits",
-    logoMode: "text",                  // "text" (nom + icône) ou "image"
+    // Logo : "svg" (dessin ci-dessous, s'adapte au fond) | "image" (fichier) | "text"
+    logoMode: "svg",
     logoImage: "assets/logo.svg",      // utilisé seulement si logoMode = "image"
+    // Logo vectoriel Chi-Agri : le texte suit la couleur (currentColor), le
+    // globe garde ses couleurs. Remplaçable par ton vrai fichier (voir README).
+    logoSvg: `<svg class="logo-svg" viewBox="0 0 360 84" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chi-Agri">
+      <text x="2" y="61" fill="currentColor" font-family="Georgia, 'Times New Roman', serif" font-size="56" letter-spacing="2">CHI</text>
+      <g transform="translate(150,42)">
+        <circle r="32" fill="#2FA84F"/>
+        <path d="M0,-32 A32,32 0 0,0 0,32 A16,16 0 0,0 0,0 A16,16 0 0,1 0,-32 Z" fill="#1B44C4"/>
+        <circle cx="0" cy="-16" r="5.5" fill="#F5A623"/>
+        <circle cx="0" cy="16" r="5.5" fill="#E5484D"/>
+      </g>
+      <text x="190" y="61" fill="currentColor" font-family="Georgia, 'Times New Roman', serif" font-size="56" letter-spacing="2">AGRI</text>
+    </svg>`,
   },
 
   /* --- Coordonnées de contact -------------------------------------------- */
   contact: {
-    email: "contact@example.com",      // ← à remplacer
-    phone: "+230 5 000 0000",          // Maurice (à remplacer)
-    phoneFrance: "",                   // (laisse "" pour masquer)
-    addressMauritius: "Port Louis, Mauritius", // ← adresse exacte à venir
-    addressFrance: "",                 // (laisse "" pour masquer)
+    person: "Jaysen Chinapyel",
+    role:   "Director",
+    email: "chiagri_Mauritius@gmail.com",
+    phone: "+230 57803810",
+    phoneFrance: "",
+    addressMauritius: "Sanashee Towers, Reserve Street, Port Louis, Mauritius",
+    addressFrance: "",
   },
 
   /* --- Images du site ----------------------------------------------------

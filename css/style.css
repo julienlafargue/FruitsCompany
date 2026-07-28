@@ -95,9 +95,10 @@ a:hover { color: var(--color-primary); }
 
 img { max-width: 100%; display: block; }
 
-/* Sections en hauteur naturelle, avec un espacement vertical symétrique et généreux */
+/* Desktop : chaque section fait au moins la taille de l'écran, contenu centré */
 section {
-  padding: clamp(72px, 9vh, 120px) 0; position: relative;
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(80px, 8vh, 110px) 0; position: relative;
 }
 
 
@@ -172,9 +173,13 @@ section {
   border-bottom: 1px solid transparent;
   transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
-/* Fin liseré aux couleurs du drapeau mauricien (rouge dominant), tout en haut */
+/* Liseré = drapeau mauricien en dégradé (rouge → bleu → jaune → vert) */
 .site-header::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 2;
-  background: linear-gradient(90deg, var(--flag-red) 0%, var(--flag-red) 58%, var(--flag-yellow) 74%, var(--flag-green) 100%); }
+  background: linear-gradient(90deg,
+    var(--flag-red) 0%, var(--flag-red) 20%,
+    var(--flag-blue) 34%, var(--flag-blue) 47%,
+    var(--flag-yellow) 60%, var(--flag-yellow) 72%,
+    var(--flag-green) 85%, var(--flag-green) 100%); }
 /* En haut : transparent → la photo du hero passe derrière (immersif).
    Au défilement : barre pleine, floutée et ombrée (intégrée). */
 .site-header.scrolled {
@@ -203,6 +208,8 @@ section {
   box-shadow: 0 6px 16px color-mix(in srgb, var(--color-primary) 40%, transparent);
 }
 .logo img.logo-img { height: 40px; width: auto; }
+.logo .logo-svg { height: 38px; width: auto; display: block; } /* texte = currentColor (s'adapte au fond) */
+.site-footer .logo .logo-svg { height: 40px; }
 .logo .logo-name b { color: var(--color-primary); }
 
 .main-nav { display: flex; align-items: center; gap: 30px; margin: 0 auto; } /* centré → aéré entre logo et actions */
@@ -304,6 +311,10 @@ section {
   animation: flagWave 12s linear infinite; /* "drapeau qui flotte" — doux et lent */
 }
 .hero-subtitle { font-size: clamp(1rem, 2.2vw, 1.28rem); opacity: .96; max-width: 620px; margin: 0 auto 34px; }
+/* Accroche sous le titre : « EXPORTER OF FRESH EXOTIC FRUITS » */
+.hero-tagline { font-family: var(--font-heading); font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.16em; font-size: clamp(0.8rem, 1.7vw, 1rem); color: #fff; opacity: .95;
+  margin: 8px 0 32px; text-shadow: 0 2px 12px rgba(0,0,0,.4); }
 .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
 .hero-scroll { position: absolute; z-index: 3; bottom: 26px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 1.6rem; opacity: .85; animation: bounceArrow 1.8s ease-in-out infinite; }
@@ -577,7 +588,7 @@ section {
 }
 
 @media (max-width: 720px) {
-  section { padding: clamp(56px, 9vh, 88px) 0; }
+  section { min-height: auto; padding: clamp(56px, 9vh, 88px) 0; }
   .hero { min-height: 100svh; }
   .nav-toggle { display: block; }
   .main-nav {

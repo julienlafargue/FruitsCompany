@@ -13,9 +13,9 @@
    suffix : "+", "%", "h"... ajouté après le nombre ("" si aucun)
    labelKey : clé de traduction (voir translations.js)                       */
 const STATS = [
-  { value: 25,  suffix: "+", icon: "🤝", labelKey: "stats.producers" },
+  { value: 2,   suffix: "+", icon: "🍍", labelKey: "stats.varieties" },   // ← 2+ fruits
   { value: 48,  suffix: "h", icon: "⏱️", labelKey: "stats.freshness" },
-  { value: 15,  suffix: "+", icon: "🧺", labelKey: "stats.varieties" },
+  { value: 100, suffix: "%", icon: "🌱", labelKey: "stats.ownfarms" },
   { value: 100, suffix: "%", icon: "🛡️", labelKey: "stats.traceability" },
 ];
 
