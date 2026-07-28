@@ -26,12 +26,10 @@ const TRANSLATIONS = {
     "nav.cta":       "Contact us",
 
     // Hero
-    "hero.badge":    "🍍 Fresh fruit & vegetable exporter",
-    "hero.title":    "Fresh <span class=\"grad\">fruits &amp; vegetables</span> from the heart of the Indian Ocean",
-    "hero.subtitle": "From 🇲🇺 Mauritius to 🇫🇷 France — picked at ripeness, delivered with full traceability.",
+    "hero.title":    "Fresh <span class=\"grad\">Fruit</span> from the heart of the Indian Ocean",
     "hero.ctaPrimary":   "Discover our products",
     "hero.ctaSecondary": "Contact us",
-    "hero.cardCaption":  "🌱 Our Mauritian plantations",
+    "hero.cardCaption":  "🌱 Our pineapple farm",
 
     // Statistiques
     "stats.producers":     "Partner producers",
@@ -41,12 +39,9 @@ const TRANSLATIONS = {
 
     // À propos
     "about.kicker": "About us",
-    "about.title":  "A direct bridge between Mauritian growers and French tables",
-    "about.p1":     "We are an export company dedicated to bringing the freshness and flavour of Mauritius to the French market. We work hand in hand with local growers to select, pack and ship fruits and vegetables at their absolute best.",
-    "about.p2":     "Our promise is simple: quality you can trust, freshness you can taste, and a supply chain you can follow from field to destination.",
-    "about.point1": "Rigorous quality selection",
-    "about.point2": "Full traceability, field to France",
-    "about.point3": "Reliable, temperature-controlled logistics",
+    "about.title":  "Grown in Mauritius, exported with care",
+    "about.p1":     "Chi-Agri grows and exports fresh exotic fruit from Mauritius — mainly Victoria pineapple and passion fruit — from our own farms on the island.",
+    "about.p2":     "We handle everything from the field to the crate: we harvest at ripeness, pack quickly and ship so the fruit arrives fresh and full of flavour.",
 
     // Producteurs
     "producers.kicker": "Our producers",
@@ -67,9 +62,10 @@ const TRANSLATIONS = {
 
     // Produits
     "products.kicker": "Our products",
-    "products.title":  "Emblematic produce of Mauritius",
-    "products.intro":  "A selection of the island's most sought-after fruits and vegetables. The full range adapts to the season and to your needs.",
+    "products.title":  "Our fruit",
+    "products.intro":  "Two exotic fruits, grown in Mauritius and available year-round.",
     "products.season": "Season",
+    "products.weight": "Weight",
 
     // Pourquoi Maurice → France
     "why.kicker": "Why Mauritius → France",
@@ -83,32 +79,39 @@ const TRANSLATIONS = {
     "why.card4.title": "A historic link",
     "why.card4.desc":  "A shared language and deep Mauritius–France ties make for a natural, trusted trade relationship.",
 
-    // Contact
+    // Contact (home = coordonnées) + Inquiry (page dédiée)
     "contact.kicker": "Contact",
-    "contact.title":  "Let's talk about your needs",
-    "contact.intro":  "Importer, wholesaler, distributor or retailer? Tell us what you're looking for and we'll get back to you quickly.",
+    "contact.title":  "Get in touch",
+    "contact.intro":  "Importer, wholesaler or distributor? Send us an inquiry.",
+    "contact.sendInquiry": "Send an inquiry",
+    "contact.info.title":     "Our contact details",
+    "contact.info.emailLabel":   "Email",
+    "contact.info.phoneLabel":   "Phone",
+    "contact.info.addressLabel": "Address",
+
+    "inquiry.kicker": "Inquiry",
+    "inquiry.title":  "Send us an inquiry",
+    "inquiry.intro":  "Tell us which fruit and quantity you're interested in.",
+    "inquiry.back":   "← Back to home",
     "contact.form.name":          "Your name",
     "contact.form.namePlaceholder":    "Full name",
     "contact.form.email":         "Your email",
     "contact.form.emailPlaceholder":   "you@company.com",
     "contact.form.company":       "Company",
     "contact.form.companyPlaceholder": "Company name",
+    "contact.form.product":       "Product of interest",
+    "contact.form.quantity":      "Quantity",
+    "contact.form.quantityPlaceholder": "e.g. pallets / tonnes",
     "contact.form.message":       "Message",
-    "contact.form.messagePlaceholder": "Tell us about your needs...",
-    "contact.form.submit":        "Send message",
-    "contact.info.title":     "Contact details",
-    "contact.info.emailLabel":   "Email",
-    "contact.info.phoneLabel":   "Phone (Mauritius)",
-    "contact.info.phoneFrLabel": "Phone (France)",
-    "contact.info.addressLabel": "Addresses",
+    "contact.form.messagePlaceholder": "Your message",
+    "contact.form.submit":        "Send inquiry",
 
     // Footer
-    "footer.tagline": "Fresh fruits & vegetables exported from Mauritius to France.",
+    "footer.tagline": "Exporter of fresh exotic fruits",
     "footer.nav":     "Navigation",
     "footer.contact": "Contact",
-    "footer.follow":  "Follow us",
     "footer.rights":  "All rights reserved.",
-    "footer.madeWith":"Exported with care from Mauritius 🇲🇺 to France 🇫🇷",
+    "footer.madeWith":"Grown and exported with care from Mauritius",
 
     // Divers (libellé du bouton = langue vers laquelle on bascule)
     "lang.toggle": "🇫🇷 FR",
@@ -126,12 +129,10 @@ const TRANSLATIONS = {
     "nav.cta":       "Nous contacter",
 
     // Hero
-    "hero.badge":    "🍍 Exportateur de fruits & légumes frais",
-    "hero.title":    "<span class=\"grad\">Fruits &amp; légumes</span> frais venus du cœur de l'océan Indien",
-    "hero.subtitle": "De 🇲🇺 Maurice vers 🇫🇷 France — cueillis à maturité, livrés en toute traçabilité.",
+    "hero.title":    "<span class=\"grad\">Fruits</span> frais venus du cœur de l'océan Indien",
     "hero.ctaPrimary":   "Découvrir nos produits",
     "hero.ctaSecondary": "Nous contacter",
-    "hero.cardCaption":  "🌱 Nos plantations à Maurice",
+    "hero.cardCaption":  "🌱 Notre ferme d'ananas",
 
     // Statistiques
     "stats.producers":     "Producteurs partenaires",
@@ -141,12 +142,9 @@ const TRANSLATIONS = {
 
     // À propos
     "about.kicker": "À propos",
-    "about.title":  "Un pont direct entre les producteurs mauriciens et les tables françaises",
-    "about.p1":     "Nous sommes une entreprise d'export dédiée à faire voyager la fraîcheur et les saveurs de Maurice jusqu'au marché français. Nous travaillons main dans la main avec les producteurs locaux pour sélectionner, conditionner et expédier les fruits et légumes au meilleur de leur forme.",
-    "about.p2":     "Notre promesse est simple : une qualité de confiance, une fraîcheur qui se goûte, et une chaîne d'approvisionnement que vous pouvez suivre du champ à la destination.",
-    "about.point1": "Sélection qualité rigoureuse",
-    "about.point2": "Traçabilité totale, du champ à la France",
-    "about.point3": "Logistique fiable et sous température dirigée",
+    "about.title":  "Cultivé à Maurice, exporté avec soin",
+    "about.p1":     "Chi-Agri cultive et exporte des fruits exotiques frais de l'île Maurice — principalement l'ananas Victoria et le fruit de la passion — depuis ses propres fermes sur l'île.",
+    "about.p2":     "Nous gérons tout, du champ à la caisse : récolte à maturité, conditionnement rapide et expédition pour que le fruit arrive frais et plein de saveur.",
 
     // Producteurs
     "producers.kicker": "Nos producteurs",
@@ -167,9 +165,10 @@ const TRANSLATIONS = {
 
     // Produits
     "products.kicker": "Nos produits",
-    "products.title":  "Les produits emblématiques de Maurice",
-    "products.intro":  "Une sélection des fruits et légumes les plus recherchés de l'île. La gamme complète s'adapte à la saison et à vos besoins.",
+    "products.title":  "Nos fruits",
+    "products.intro":  "Deux fruits exotiques, cultivés à l'île Maurice et disponibles toute l'année.",
     "products.season": "Saison",
+    "products.weight": "Poids",
 
     // Pourquoi Maurice → France
     "why.kicker": "Pourquoi Maurice → France",
@@ -183,32 +182,39 @@ const TRANSLATIONS = {
     "why.card4.title": "Un lien historique",
     "why.card4.desc":  "Une langue commune et des liens profonds entre Maurice et la France pour une relation commerciale naturelle et de confiance.",
 
-    // Contact
+    // Contact (home = coordonnées) + Inquiry (page dédiée)
     "contact.kicker": "Contact",
-    "contact.title":  "Parlons de vos besoins",
-    "contact.intro":  "Importateur, grossiste, distributeur ou détaillant ? Dites-nous ce que vous recherchez et nous vous répondrons rapidement.",
+    "contact.title":  "Contactez-nous",
+    "contact.intro":  "Importateur, grossiste ou distributeur ? Envoyez-nous une demande.",
+    "contact.sendInquiry": "Envoyer une demande",
+    "contact.info.title":     "Nos coordonnées",
+    "contact.info.emailLabel":   "Email",
+    "contact.info.phoneLabel":   "Téléphone",
+    "contact.info.addressLabel": "Adresse",
+
+    "inquiry.kicker": "Demande",
+    "inquiry.title":  "Envoyez-nous une demande",
+    "inquiry.intro":  "Indiquez-nous le fruit et la quantité qui vous intéressent.",
+    "inquiry.back":   "← Retour à l'accueil",
     "contact.form.name":          "Votre nom",
     "contact.form.namePlaceholder":    "Nom complet",
     "contact.form.email":         "Votre email",
     "contact.form.emailPlaceholder":   "vous@entreprise.com",
     "contact.form.company":       "Société",
     "contact.form.companyPlaceholder": "Nom de la société",
+    "contact.form.product":       "Produit concerné",
+    "contact.form.quantity":      "Quantité",
+    "contact.form.quantityPlaceholder": "ex. palettes / tonnes",
     "contact.form.message":       "Message",
-    "contact.form.messagePlaceholder": "Parlez-nous de vos besoins...",
-    "contact.form.submit":        "Envoyer le message",
-    "contact.info.title":     "Coordonnées",
-    "contact.info.emailLabel":   "Email",
-    "contact.info.phoneLabel":   "Téléphone (Maurice)",
-    "contact.info.phoneFrLabel": "Téléphone (France)",
-    "contact.info.addressLabel": "Adresses",
+    "contact.form.messagePlaceholder": "Votre message",
+    "contact.form.submit":        "Envoyer la demande",
 
     // Footer
-    "footer.tagline": "Fruits & légumes frais exportés de Maurice vers la France.",
+    "footer.tagline": "Exportateur de fruits exotiques frais",
     "footer.nav":     "Navigation",
     "footer.contact": "Contact",
-    "footer.follow":  "Suivez-nous",
     "footer.rights":  "Tous droits réservés.",
-    "footer.madeWith":"Exporté avec soin de Maurice 🇲🇺 vers la France 🇫🇷",
+    "footer.madeWith":"Cultivé et exporté avec soin depuis l'île Maurice",
 
     // Divers (libellé du bouton = langue vers laquelle on bascule)
     "lang.toggle": "🇬🇧 EN",

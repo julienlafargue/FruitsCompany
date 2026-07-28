@@ -95,10 +95,9 @@ a:hover { color: var(--color-primary); }
 
 img { max-width: 100%; display: block; }
 
-/* Chaque section occupe un écran complet, contenu centré verticalement */
+/* Sections en hauteur naturelle, avec un espacement vertical symétrique et généreux */
 section {
-  padding: 84px 0 28px; position: relative;
-  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(72px, 9vh, 120px) 0; position: relative;
 }
 
 
@@ -173,8 +172,9 @@ section {
   border-bottom: 1px solid transparent;
   transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
-/* Fin liseré aux couleurs du drapeau mauricien, tout en haut */
-.site-header::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-flag); z-index: 2; }
+/* Fin liseré aux couleurs du drapeau mauricien (rouge dominant), tout en haut */
+.site-header::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 2;
+  background: linear-gradient(90deg, var(--flag-red) 0%, var(--flag-red) 58%, var(--flag-yellow) 74%, var(--flag-green) 100%); }
 /* En haut : transparent → la photo du hero passe derrière (immersif).
    Au défilement : barre pleine, floutée et ombrée (intégrée). */
 .site-header.scrolled {
@@ -250,7 +250,8 @@ section {
    ========================================================================== */
 .hero {
   position: relative; overflow: hidden; color: #fff;
-  min-height: 100vh; display: grid; align-items: center;
+  min-height: 100vh; min-height: 100svh; /* svh = hauteur visible réelle sur mobile */
+  display: grid; align-items: center;
   padding: 120px 0 90px;
 }
 /* Photo de fond (injectée en variable --hero-img par main.js) */
@@ -449,10 +450,12 @@ section {
 .product-media .pm-emoji { position: absolute; bottom: -18px; left: 18px; z-index: 2; width: 44px; height: 44px; border-radius: 12px; background: var(--color-surface); display: grid; place-items: center; font-size: 1.3rem; box-shadow: var(--shadow); }
 .product-tag { position: absolute; top: 12px; right: 12px; z-index: 2; font-size: 0.66rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #fff; background: var(--gradient-sun); padding: 5px 11px; border-radius: 100px; }
 .product-body { padding: 26px 22px 24px; }
-.product-body h3 { font-size: 1.14rem; margin-bottom: 6px; }
-.product-season { font-size: 0.8rem; color: var(--color-text-soft); margin-bottom: 10px; }
-.product-season b { color: var(--color-primary); font-weight: 600; }
-.product-desc { font-size: 0.9rem; color: var(--color-text-soft); }
+.product-body h3 { font-size: 1.18rem; margin-bottom: 10px; }
+/* Saison + poids */
+.product-specs { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 12px; }
+.product-meta { font-size: 0.92rem; color: var(--color-text); font-weight: 600; }
+.product-meta .pm-label { display: block; color: var(--color-text-soft); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 1px; }
+.product-desc { font-size: 0.92rem; color: var(--color-text-soft); }
 
 
 /* ==========================================================================
@@ -480,8 +483,18 @@ section {
    15. CONTACT
    ========================================================================== */
 .contact-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; }
+/* Home : bloc coordonnées centré (le formulaire est sur inquiry.html) */
+.contact-single { display: flex; justify-content: center; }
+.contact-single .contact-info { max-width: 460px; width: 100%; }
+.contact-info .btn { margin-top: 22px; position: relative; z-index: 1; }
 .contact-form { display: grid; gap: 18px; }
 .field { display: grid; gap: 6px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.field select { font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 13px 15px; }
+.field select:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 15%, transparent); }
+/* Pages secondaires (inquiry) : le contenu passe sous le header fixe */
+.subpage-section { padding-top: calc(var(--header-height) + clamp(40px, 6vh, 80px)); }
+.inquiry-wrap { max-width: 640px; margin: 0 auto; }
 .field label { font-weight: 600; font-size: 0.9rem; }
 .field input, .field textarea {
   font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text);
@@ -504,7 +517,7 @@ section {
    16. FOOTER
    ========================================================================== */
 .site-footer { background: var(--color-text); color: rgba(255,255,255,0.8); padding: 68px 0 28px; }
-.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-grid { display: grid; grid-template-columns: 1.8fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
 .footer-brand .logo { color: #fff; margin-bottom: 14px; }
 .footer-brand .logo .logo-name b { color: var(--color-accent); }
 .footer-brand p { font-size: 0.92rem; max-width: 280px; }
@@ -564,8 +577,8 @@ section {
 }
 
 @media (max-width: 720px) {
-  section { padding: 92px 0; min-height: auto; } /* plein écran sur desktop, hauteur libre sur mobile */
-  .hero { min-height: 100vh; }
+  section { padding: clamp(56px, 9vh, 88px) 0; }
+  .hero { min-height: 100svh; }
   .nav-toggle { display: block; }
   .main-nav {
     position: fixed; inset: var(--header-height) 0 auto 0; flex-direction: column; align-items: stretch; gap: 0;

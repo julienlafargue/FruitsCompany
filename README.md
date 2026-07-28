@@ -1,18 +1,21 @@
-# Site vitrine — Export fruits & légumes 🇲🇺 → 🇫🇷
+# Chi-Agri — site vitrine (fruits exotiques frais de l'île Maurice 🇲🇺)
 
 Site vitrine **statique** (HTML / CSS / JavaScript pur, sans framework ni étape de build)
-pour une entreprise exportant des fruits et légumes frais de l'île Maurice vers la France.
+pour **Chi-Agri**, exportateur de fruits exotiques frais de l'île Maurice
+(ananas Victoria & fruit de la passion, cultivés sur ses propres fermes).
 
-- ✅ Fonctionne en ouvrant simplement `index.html` (ou via GitHub Pages)
+- ✅ Fonctionne en ouvrant `index.html` (ou via GitHub Pages)
+- ✅ **2 pages** : `index.html` (one-page) + `inquiry.html` (formulaire de demande)
 - ✅ Bilingue **EN / FR** avec bouton de bascule (persistance `localStorage`)
-- ✅ Charte graphique aux **couleurs du drapeau mauricien** 🇲🇺 (rouge / bleu / jaune / vert)
-- ✅ Design immersif : chaque section **plein écran** avec **navigation assistée**
-  (points latéraux + scroll-snap), photo hero, dégradé « drapeau mauricien qui flotte »
-  sur le titre, compteurs animés, apparitions au scroll, **fiches producteurs cliquables**
-- ✅ Vraies photos (fruits, producteurs, plantations) + **carrousel** dans « À propos »
-- ✅ **SEO optimisé** import/export · fruits & légumes · Maurice · France
-  (meta, Open Graph, Twitter, données structurées JSON-LD, bilingue)
+- ✅ Charte aux **couleurs du drapeau mauricien** 🇲🇺
+- ✅ Hero immersif (lagon de Maurice + carte « ferme d'ananas »), titre au dégradé
+  « drapeau qui flotte », carrousel « À propos », navigation latérale, animations
+- ✅ **SEO** (meta, Open Graph, Twitter, JSON-LD, bilingue)
 - ✅ Contenu 100 % centralisé : tout se modifie sans toucher au HTML
+
+> ℹ️ À finaliser (fournis par le client) : logo, adresse exacte à Port Louis,
+> chiffres des stats « À propos », email/téléphone. La section « Nos producteurs »
+> a été retirée pour l'instant (données conservées dans `content.js` pour un retour futur).
 
 ---
 
@@ -20,14 +23,15 @@ pour une entreprise exportant des fruits et légumes frais de l'île Maurice ver
 
 ```
 .
-├── index.html            # Structure de la page (aucun texte en dur)
+├── index.html            # Page principale (one-page, aucun texte en dur)
+├── inquiry.html          # 2e page : formulaire de demande
 ├── css/
 │   └── style.css         # Styles + variables de thème (couleurs en haut)
 ├── js/
-│   ├── config.js         # ⭐ Nom, logo, coordonnées, réglages
-│   ├── content.js        # ⭐ Produits & producteurs (listes structurées)
+│   ├── config.js         # ⭐ Nom, logo, coordonnées, images, SEO
+│   ├── content.js        # ⭐ Produits (+ producteurs, en réserve)
 │   ├── translations.js   # ⭐ Tous les textes EN / FR
-│   └── main.js           # Logique (i18n, palettes, menu, formulaire)
+│   └── main.js           # Logique (i18n, menu, carrousel, formulaire)
 ├── assets/
 │   ├── logo.svg          # Logo placeholder (si logoMode = "image")
 │   ├── favicon.svg       # Favicon placeholder

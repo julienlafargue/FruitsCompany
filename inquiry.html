@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--
+  inquiry.html — Page de demande (2e page). Réutilise le même header/footer et
+  les mêmes fichiers JS/CSS que index.html. Le formulaire ouvre le client mail
+  (mailto) via js/main.js (fonction buildMailto).
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inquiry — Chi-Agri</title>
+  <meta name="description" content="Send an inquiry to Chi-Agri, Mauritian exporter of fresh exotic fruits (Victoria pineapple, passion fruit)." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Pacifico&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="subpage">
+
+  <!-- ====================== HEADER ====================== -->
+  <header class="site-header scrolled">
+    <div class="container">
+      <a href="index.html" class="logo" id="headerLogo" aria-label="Home"></a>
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <a href="index.html#about"><span data-i18n="nav.about"></span></a>
+        <a href="index.html#products"><span data-i18n="nav.products"></span></a>
+        <a href="index.html" class="btn btn-primary" data-i18n="inquiry.back"></a>
+      </nav>
+      <div class="header-actions">
+        <button class="lang-toggle" id="langToggle" aria-label="Switch language">FR</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="inquiry" class="mesh subpage-section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker" data-i18n="inquiry.kicker"></span>
+          <h2 data-i18n="inquiry.title"></h2>
+          <p data-i18n="inquiry.intro"></p>
+        </div>
+
+        <div class="inquiry-wrap reveal">
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="field">
+              <label for="cf-name" data-i18n="contact.form.name"></label>
+              <input type="text" id="cf-name" name="name"
+                     data-i18n-attr="placeholder:contact.form.namePlaceholder" required />
+            </div>
+            <div class="field">
+              <label for="cf-email" data-i18n="contact.form.email"></label>
+              <input type="email" id="cf-email" name="email"
+                     data-i18n-attr="placeholder:contact.form.emailPlaceholder" required />
+            </div>
+            <div class="field">
+              <label for="cf-company" data-i18n="contact.form.company"></label>
+              <input type="text" id="cf-company" name="company"
+                     data-i18n-attr="placeholder:contact.form.companyPlaceholder" />
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="cf-product" data-i18n="contact.form.product"></label>
+                <select id="cf-product" name="product">
+                  <option value="Victoria Pineapple">Victoria Pineapple</option>
+                  <option value="Passion Fruit">Passion Fruit</option>
+                  <option value="Both">Victoria Pineapple &amp; Passion Fruit</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="cf-quantity" data-i18n="contact.form.quantity"></label>
+                <input type="text" id="cf-quantity" name="quantity"
+                       data-i18n-attr="placeholder:contact.form.quantityPlaceholder" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="cf-message" data-i18n="contact.form.message"></label>
+              <textarea id="cf-message" name="message"
+                        data-i18n-attr="placeholder:contact.form.messagePlaceholder"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" data-i18n="contact.form.submit"></button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====================== FOOTER ====================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo" id="footerLogo"></span>
+          <p data-i18n="footer.tagline"></p>
+        </div>
+        <div>
+          <h4 data-i18n="footer.nav"></h4>
+          <ul>
+            <li><a href="index.html#about"    data-i18n="nav.about"></a></li>
+            <li><a href="index.html#products" data-i18n="nav.products"></a></li>
+            <li><a href="inquiry.html"        data-i18n="nav.cta"></a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="footer.contact"></h4>
+          <ul>
+            <li><a id="footerEmail" href="#"></a></li>
+            <li><a id="footerPhone" href="#"></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="footerYear"></span> <span data-i18n="footer.rights"></span></span>
+        <span data-i18n="footer.madeWith"></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/content.js"></script>
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
