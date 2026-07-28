@@ -57,8 +57,8 @@
     fillSEO();
     renderProducts();
     renderProducers();
-    buildMarquee();
     buildMailto();
+    updateSectionNavLabels();
     if (openProducerIndex !== null) fillModal(openProducerIndex); // met à jour la modal ouverte
   }
 
@@ -119,25 +119,6 @@
     start();
   }
 
-  /* Ruban défilant façon "drapeau" : symboles typiques de Maurice + produits.
-     Répété 2× pour une boucle sans couture. */
-  function buildMarquee() {
-    const track = document.getElementById("marqueeTrack");
-    if (!track) return;
-    const symbols = currentLang === "fr"
-      ? ["🇲🇺 De Maurice vers la France", "🦤 Dodo", "★ Étoile et Clé de l'océan Indien", "🌺 Hibiscus"]
-      : ["🇲🇺 From Mauritius to France", "🦤 Dodo", "★ Star & Key of the Indian Ocean", "🌺 Hibiscus"];
-    const products = PRODUCTS.map((p) => `${p.emoji} ${p.name[currentLang]}`);
-    // Alterne symboles mauriciens et produits
-    const all = [];
-    const max = Math.max(symbols.length, products.length);
-    for (let i = 0; i < max; i++) {
-      if (symbols[i]) all.push(symbols[i]);
-      if (products[i]) all.push(products[i]);
-    }
-    const html = all.map((x) => `<span>${x}</span>`).join("");
-    track.innerHTML = html + html;
-  }
 
 
   /* ======================================================================
@@ -417,6 +398,45 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
+  /* Navigation latérale par points : aide à circuler entre les sections. */
+  const SECTION_NAV = [
+    ["hero", "nav.home"], ["about", "nav.about"], ["producers", "nav.producers"],
+    ["products", "nav.products"], ["why", "nav.why"], ["contact", "nav.contact"],
+  ];
+
+  function initSectionNav() {
+    const nav = document.createElement("nav");
+    nav.className = "section-nav";
+    nav.setAttribute("aria-label", "Sections");
+    nav.innerHTML = SECTION_NAV.map(([id, key]) =>
+      `<a href="#${id}" class="sn-dot" data-id="${id}" aria-label="${t(key)}">
+         <span class="sn-label">${t(key)}</span>
+       </a>`
+    ).join("");
+    document.body.appendChild(nav);
+
+    const dots = [...nav.querySelectorAll(".sn-dot")];
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) dots.forEach((d) => d.classList.toggle("active", d.dataset.id === e.target.id));
+        });
+      }, { threshold: 0.5, rootMargin: "-20% 0px -20% 0px" });
+      SECTION_NAV.forEach(([id]) => { const s = document.getElementById(id); if (s) io.observe(s); });
+    }
+  }
+
+  /* Met à jour les libellés (tooltips) des points au changement de langue. */
+  function updateSectionNavLabels() {
+    document.querySelectorAll(".section-nav .sn-dot").forEach((dot) => {
+      const key = SECTION_NAV.find(([id]) => id === dot.dataset.id);
+      if (!key) return;
+      dot.setAttribute("aria-label", t(key[1]));
+      const label = dot.querySelector(".sn-label");
+      if (label) label.textContent = t(key[1]);
+    });
+  }
+
 
   /* ======================================================================
      10. INITIALISATION
@@ -429,13 +449,13 @@
 
     applyImages();
     buildAboutCarousel();
-    buildMarquee();
     fillContactInfo();
     renderStats();
     renderProducts();
     renderProducers();
     buildMailto();
     initModal();
+    initSectionNav();
 
     applyTranslations();
     fillSEO();
