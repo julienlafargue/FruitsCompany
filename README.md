@@ -6,9 +6,9 @@ pour une entreprise exportant des fruits et légumes frais de l'île Maurice ver
 - ✅ Fonctionne en ouvrant simplement `index.html` (ou via GitHub Pages)
 - ✅ Bilingue **EN / FR** avec bouton de bascule (persistance `localStorage`)
 - ✅ Charte graphique aux **couleurs du drapeau mauricien** 🇲🇺 (rouge / bleu / jaune / vert)
-- ✅ Design immersif : chaque section **plein écran**, photo hero, ruban défilant avec
-  symboles typiques (dodo 🦤, hibiscus 🌺, devise « Star & Key »), compteurs animés,
-  apparitions au scroll, **fiches producteurs cliquables**
+- ✅ Design immersif : chaque section **plein écran** avec **navigation assistée**
+  (points latéraux + scroll-snap), photo hero, dégradé « drapeau mauricien qui flotte »
+  sur le titre, compteurs animés, apparitions au scroll, **fiches producteurs cliquables**
 - ✅ Vraies photos (fruits, producteurs, plantations) + **carrousel** dans « À propos »
 - ✅ **SEO optimisé** import/export · fruits & légumes · Maurice · France
   (meta, Open Graph, Twitter, données structurées JSON-LD, bilingue)

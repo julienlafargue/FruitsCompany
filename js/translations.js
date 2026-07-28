@@ -17,6 +17,7 @@ const TRANSLATIONS = {
   /* ===================== ANGLAIS (langue par défaut) ===================== */
   en: {
     // Navigation
+    "nav.home":      "Home",
     "nav.about":     "About",
     "nav.producers": "Producers",
     "nav.products":  "Products",
@@ -116,6 +117,7 @@ const TRANSLATIONS = {
   /* ========================= FRANÇAIS ==================================== */
   fr: {
     // Navigation
+    "nav.home":      "Accueil",
     "nav.about":     "À propos",
     "nav.producers": "Producteurs",
     "nav.products":  "Produits",
