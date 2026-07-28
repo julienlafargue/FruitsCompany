@@ -13,38 +13,38 @@
    suffix : "+", "%", "h"... ajouté après le nombre ("" si aucun)
    labelKey : clé de traduction (voir translations.js)                       */
 const STATS = [
-  { value: 25,  suffix: "+", icon: "🤝", labelKey: "stats.producers" },
+  { value: 2,   suffix: "+", icon: "🍍", labelKey: "stats.varieties" },   // ← 2+ fruits
   { value: 48,  suffix: "h", icon: "⏱️", labelKey: "stats.freshness" },
-  { value: 15,  suffix: "+", icon: "🧺", labelKey: "stats.varieties" },
+  { value: 100, suffix: "%", icon: "🌱", labelKey: "stats.ownfarms" },
   { value: 100, suffix: "%", icon: "🛡️", labelKey: "stats.traceability" },
 ];
 
-/* --- Produits emblématiques ----------------------------------------------
+/* --- Produits ------------------------------------------------------------
    img    : vraie photo (Unsplash "photo-..." ou "assets/img/...")
    name / season / desc : bilingue (en / fr)
-   tag    : petit badge optionnel ("" pour aucun)                            */
+   weight : poids indicatif par fruit (affiché sur la carte)                 */
 const PRODUCTS = [
   {
-    img: "photo-1589820296156-2454bb8a6ad1",
+    img: "photo-1781292428366-c61960596e2b",
     emoji: "🍍",
     name:   { en: "Victoria Pineapple", fr: "Ananas Victoria" },
     season: { en: "Year-round",         fr: "Toute l'année" },
+    weight: "550–800 g",
     desc: {
-      en: "Small, intensely sweet and fragrant — the signature pineapple of Mauritius.",
-      fr: "Petit, intensément sucré et parfumé — l'ananas emblématique de Maurice.",
+      en: "Grown on our own farms in Mauritius. Small, golden and very sweet, with a soft core and low acidity.",
+      fr: "Cultivé dans nos fermes à l'île Maurice. Petit, doré et très sucré, à cœur tendre et peu acide.",
     },
-    tag: { en: "Signature", fr: "Emblématique" },
   },
   {
-    img: "photo-1616077498072-ccba9b178fa5",
-    emoji: "🍈",
+    img: "photo-1604495772376-9657f0035eb5",
+    emoji: "🟣",
     name:   { en: "Passion Fruit", fr: "Fruit de la Passion" },
     season: { en: "Year-round",    fr: "Toute l'année" },
+    weight: "550–800 g",
     desc: {
-      en: "Tangy, intensely aromatic and packed with pulp — prized by chefs and juice makers alike.",
-      fr: "Acidulé, intensément parfumé et gorgé de pulpe — prisé des chefs comme des jus artisanaux.",
+      en: "Deep purple skin and bright, aromatic pulp. Grown in Mauritius and hand-picked when fully ripe.",
+      fr: "Peau pourpre et pulpe parfumée. Cultivé à l'île Maurice et cueilli à la main à pleine maturité.",
     },
-    tag: { en: "Premium", fr: "Premium" },
   },
 ];
 

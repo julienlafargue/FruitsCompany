@@ -10,30 +10,35 @@ const SITE_CONFIG = {
 
   /* --- Identité de l'entreprise ------------------------------------------ */
   company: {
-    // Nom AFFICHÉ (le logo). Nom factice le temps d'avoir le vrai.
-    // Astuce : le texte entre <b></b> est coloré (2 tons dans le logo).
-    name: "Mauri<b>lis</b>",
-    // Nom "brut" (sans HTML) — utilisé pour le SEO, l'email, le titre d'onglet.
-    nameText: "Maurilis",
-    tagline: "Primeurs de l'île Maurice",
-    logoMode: "text",                  // "text" (nom + icône) ou "image"
+    name: "Chi-Agri",
+    nameText: "Chi-Agri",
+    tagline: "Exporter of fresh exotic fruits",
+    // Logo : "svg" (dessin ci-dessous, s'adapte au fond) | "image" (fichier) | "text"
+    logoMode: "svg",
     logoImage: "assets/logo.svg",      // utilisé seulement si logoMode = "image"
+    // Logo vectoriel Chi-Agri : le texte suit la couleur (currentColor), le
+    // globe garde ses couleurs. Remplaçable par ton vrai fichier (voir README).
+    logoSvg: `<svg class="logo-svg" viewBox="0 0 360 84" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chi-Agri">
+      <text x="2" y="61" fill="currentColor" font-family="Georgia, 'Times New Roman', serif" font-size="56" letter-spacing="2">CHI</text>
+      <g transform="translate(150,42)">
+        <circle r="32" fill="#2FA84F"/>
+        <path d="M0,-32 A32,32 0 0,0 0,32 A16,16 0 0,0 0,0 A16,16 0 0,1 0,-32 Z" fill="#1B44C4"/>
+        <circle cx="0" cy="-16" r="5.5" fill="#F5A623"/>
+        <circle cx="0" cy="16" r="5.5" fill="#E5484D"/>
+      </g>
+      <text x="190" y="61" fill="currentColor" font-family="Georgia, 'Times New Roman', serif" font-size="56" letter-spacing="2">AGRI</text>
+    </svg>`,
   },
 
   /* --- Coordonnées de contact -------------------------------------------- */
   contact: {
-    email: "contact@example.com",
-    phone: "+230 5 000 0000",          // Maurice
-    phoneFrance: "+33 6 00 00 00 00",  // France (laisse "" pour masquer)
-    addressMauritius: "Port-Louis, Île Maurice",
-    addressFrance: "Rungis, France",
-  },
-
-  /* --- Réseaux sociaux (laisse "" pour masquer un lien) ------------------- */
-  social: {
-    linkedin: "",
-    instagram: "",
-    facebook: "",
+    person: "Jaysen Chinapyel",
+    role:   "Director",
+    email: "chiagri_Mauritius@gmail.com",
+    phone: "+230 57803810",
+    phoneFrance: "",
+    addressMauritius: "Sanashee Towers, Reserve Street, Port Louis, Mauritius",
+    addressFrance: "",
   },
 
   /* --- Images du site ----------------------------------------------------
@@ -45,16 +50,14 @@ const SITE_CONFIG = {
      remplace simplement les valeurs ci-dessous par leur chemin.            */
   images: {
     hero:        "photo-1513415277900-a62401e19be4", // lagon de Maurice (Le Morne)
-    heroCard:    "photo-1707282399877-8d57c412c5c4", // carte "plantation" flottante (papayers)
-    // Carrousel défilant de la section « À propos » (ajoute/retire des photos librement)
+    heroCard:    "photo-1649960861739-113b8588eaf8", // carte flottante : ferme d'ananas
+    // Carrousel « À propos » : uniquement ananas / fruit de la passion + fermes
     aboutSlides: [
-      "photo-1768734836361-68606214611c", // ananas au marché
-      "photo-1545830790-68595959c491",    // producteur souriant
-      "photo-1659822887922-c1386185cc6b", // panier de légumes frais
-      "photo-1592864554447-5e40d96e2b21", // mains tenant la récolte
+      "photo-1546546683-7fe6f2a456d3",    // champ d'ananas
+      "photo-1604360829141-704ec65eda94", // régime d'ananas sur pied
+      "photo-1628341423248-4b8c5c51a3cd", // fleur / vigne de passiflore
+      "photo-1502009285422-74e42ac2fd68", // fruit de la passion coupé
     ],
-    producersBg: "photo-1765055237527-f92fdd1a2c68", // plantation vue du ciel
-    whyBg:       "photo-1509440159596-0249088772ff", // caisses de produits frais
   },
 
   /* --- Langue ------------------------------------------------------------ */
@@ -64,17 +67,17 @@ const SITE_CONFIG = {
      ⭐ Textes optimisés pour import/export de fruits & légumes, Maurice, France.
      Remplace `url` par ton vrai domaine une fois le site en ligne.          */
   seo: {
-    url: "https://exemple-maurilis.com/",              // ← ton domaine
-    ogImage: "photo-1513415277900-a62401e19be4",       // image de partage (réseaux sociaux)
+    url: "https://exemple-chi-agri.com/",              // ← ton domaine
+    ogImage: "photo-1649960861739-113b8588eaf8",       // image de partage (ferme d'ananas)
     title: {
-      en: "Maurilis — Fresh fruit & vegetable export from Mauritius to France",
-      fr: "Maurilis — Export de fruits & légumes frais de l'île Maurice vers la France",
+      en: "Chi-Agri — Exporter of fresh exotic fruits from Mauritius",
+      fr: "Chi-Agri — Exportateur de fruits exotiques frais de l'île Maurice",
     },
     description: {
-      en: "Maurilis exports fresh Mauritian fruits and vegetables to France: Victoria pineapple, lychees, mangoes, chillies. Direct sourcing from partner growers, full traceability, controlled cold chain. B2B import/export specialist.",
-      fr: "Maurilis exporte les fruits et légumes frais de l'île Maurice vers la France : ananas Victoria, letchis, mangues, piments. Sourcing direct chez les producteurs, traçabilité totale, chaîne du froid maîtrisée. Spécialiste import/export B2B.",
+      en: "Chi-Agri is a Mauritian exporter of fresh exotic fruits: Victoria pineapple and passion fruit, grown on our own farms in Mauritius. Based in Port Louis.",
+      fr: "Chi-Agri, exportateur mauricien de fruits exotiques frais : ananas Victoria et fruit de la passion, cultivés dans nos fermes à l'île Maurice. Basé à Port Louis.",
     },
-    keywords: "export fruits légumes Maurice France, import export île Maurice, fruits tropicaux Maurice, ananas Victoria, letchis Maurice, mangues Maurice, piments Maurice, grossiste fruits exotiques, importateur fruits et légumes France, fruits et légumes frais Maurice, primeurs Maurice, Mauritius fruit export, tropical fruit importer France",
+    keywords: "Chi-Agri, exotic fruit export Mauritius, Victoria pineapple, passion fruit, pineapple farm Mauritius, Mauritius fruit exporter, Port Louis, fresh exotic fruits, ananas Victoria, fruit de la passion, exportateur fruits Maurice",
   },
 
   /* NB : la charte graphique est celle du drapeau mauricien 🇲🇺.

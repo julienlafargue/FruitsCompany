@@ -131,7 +131,9 @@
   function buildLogo(container) {
     if (!container) return;
     container.innerHTML = "";
-    if (SITE_CONFIG.company.logoMode === "image") {
+    if (SITE_CONFIG.company.logoMode === "svg" && SITE_CONFIG.company.logoSvg) {
+      container.innerHTML = SITE_CONFIG.company.logoSvg;
+    } else if (SITE_CONFIG.company.logoMode === "image") {
       const img = document.createElement("img");
       img.src = SITE_CONFIG.company.logoImage;
       img.alt = SITE_CONFIG.company.name;
@@ -154,27 +156,13 @@
     const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     const setHref = (id, v) => { const el = document.getElementById(id); if (el) el.setAttribute("href", v); };
 
+    if (c.person) setText("infoPerson", c.role ? c.person + " · " + c.role : c.person);
     setText("infoEmail", c.email); setHref("infoEmail", "mailto:" + c.email);
     setText("infoPhone", c.phone); setHref("infoPhone", "tel:" + c.phone.replace(/\s+/g, ""));
+    setText("infoAddress", c.addressMauritius);
 
-    const phoneFrItem = document.getElementById("infoPhoneFrItem");
-    if (c.phoneFrance) {
-      setText("infoPhoneFr", c.phoneFrance);
-      setHref("infoPhoneFr", "tel:" + c.phoneFrance.replace(/\s+/g, ""));
-    } else if (phoneFrItem) { phoneFrItem.style.display = "none"; }
-
-    setText("infoAddress", c.addressMauritius + " · " + c.addressFrance);
     setText("footerEmail", c.email); setHref("footerEmail", "mailto:" + c.email);
     setText("footerPhone", c.phone); setHref("footerPhone", "tel:" + c.phone.replace(/\s+/g, ""));
-
-    const s = SITE_CONFIG.social;
-    [["footerLinkedin", s.linkedin], ["footerInstagram", s.instagram], ["footerFacebook", s.facebook]]
-      .forEach(([id, url]) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        if (url) el.setAttribute("href", url);
-        else el.parentElement.style.display = "none";
-      });
   }
 
   /* Met à jour titre + balises SEO selon la langue (depuis SITE_CONFIG.seo). */
@@ -215,18 +203,20 @@
     const grid = document.getElementById("productsGrid");
     if (!grid) return;
     grid.innerHTML = PRODUCTS.map((p) => {
-      const tag = p.tag && p.tag[currentLang] ? `<span class="product-tag">${p.tag[currentLang]}</span>` : "";
       const img = resolveImage(p.img, 500, 360);
+      const weight = p.weight ? `<span class="product-meta"><span class="pm-label">${t("products.weight")}</span> ${p.weight}</span>` : "";
       return `
         <article class="product-card">
           <div class="product-media">
             <div class="pm-img" style="background-image:url('${img}')"></div>
-            ${tag}
             <span class="pm-emoji">${p.emoji}</span>
           </div>
           <div class="product-body">
             <h3>${p.name[currentLang]}</h3>
-            <p class="product-season">${t("products.season")} : <b>${p.season[currentLang]}</b></p>
+            <div class="product-specs">
+              <span class="product-meta"><span class="pm-label">${t("products.season")}</span> ${p.season[currentLang]}</span>
+              ${weight}
+            </div>
             <p class="product-desc">${p.desc[currentLang]}</p>
           </div>
         </article>`;
@@ -313,13 +303,14 @@
     if (!form) return;
     form.onsubmit = function (e) {
       e.preventDefault();
-      const name = (form.name.value || "").trim();
-      const email = (form.email.value || "").trim();
-      const company = (form.company.value || "").trim();
-      const message = (form.message.value || "").trim();
+      const val = (n) => (form[n] && form[n].value ? form[n].value.trim() : "");
+      const name = val("name"), email = val("email"), company = val("company");
+      const product = val("product"), quantity = val("quantity"), message = val("message");
       const brand = SITE_CONFIG.company.nameText || SITE_CONFIG.company.name;
-      const subject = `[${brand}] Contact — ${name || email}`;
-      const body = `${message}\n\n— — —\nName: ${name}\nEmail: ${email}\nCompany: ${company}`;
+      const subject = `[${brand}] Inquiry — ${name || email}`;
+      let body = `${message}\n\n— — —\nName: ${name}\nEmail: ${email}\nCompany: ${company}`;
+      if (product) body += `\nProduct: ${product}`;
+      if (quantity) body += `\nQuantity: ${quantity}`;
       window.location.href =
         `mailto:${SITE_CONFIG.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     };
@@ -397,6 +388,8 @@
   function initHeaderScroll() {
     const header = document.querySelector(".site-header");
     if (!header) return;
+    // Pages sans hero (ex. inquiry.html) : header toujours solide (lisible).
+    if (!document.getElementById("hero")) { header.classList.add("scrolled"); return; }
     const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -404,11 +397,13 @@
 
   /* Navigation latérale par points : aide à circuler entre les sections. */
   const SECTION_NAV = [
-    ["hero", "nav.home"], ["about", "nav.about"], ["producers", "nav.producers"],
-    ["products", "nav.products"], ["why", "nav.why"], ["contact", "nav.contact"],
+    ["hero", "nav.home"], ["about", "nav.about"],
+    ["products", "nav.products"], ["contact", "nav.contact"],
   ];
 
   function initSectionNav() {
+    // Ne construire les points que si les sections existent (pas sur inquiry.html)
+    if (!document.getElementById("hero")) return;
     const nav = document.createElement("nav");
     nav.className = "section-nav";
     nav.setAttribute("aria-label", "Sections");
