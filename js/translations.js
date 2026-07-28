@@ -26,13 +26,12 @@ const TRANSLATIONS = {
     "nav.cta":       "Contact us",
 
     // Hero
-    "hero.role":     "🍍 Fresh fruit & vegetable export specialist",
-    "hero.badge":    "🇲🇺 Mauritius → 🇫🇷 France",
+    "hero.badge":    "🍍 Fresh fruit & vegetable exporter",
     "hero.title":    "Fresh <span class=\"grad\">fruits &amp; vegetables</span> from the heart of the Indian Ocean",
-    "hero.subtitle": "We export the finest fresh produce of Mauritius directly to France — picked at ripeness, shipped with care, delivered with full traceability.",
+    "hero.subtitle": "From 🇲🇺 Mauritius to 🇫🇷 France — picked at ripeness, delivered with full traceability.",
     "hero.ctaPrimary":   "Discover our products",
     "hero.ctaSecondary": "Contact us",
-    "hero.motto":    "★ Star & Key of the Indian Ocean",
+    "hero.cardCaption":  "🌱 Our Mauritian plantations",
 
     // Statistiques
     "stats.producers":     "Partner producers",
@@ -127,13 +126,12 @@ const TRANSLATIONS = {
     "nav.cta":       "Nous contacter",
 
     // Hero
-    "hero.role":     "🍍 Spécialiste de l'export de fruits & légumes frais",
-    "hero.badge":    "🇲🇺 Maurice → 🇫🇷 France",
-    "hero.title":    "Fruits &amp; <span class=\"grad\">légumes frais</span> venus du cœur de l'océan Indien",
-    "hero.subtitle": "Nous exportons les meilleurs produits frais de Maurice directement vers la France — cueillis à maturité, expédiés avec soin, livrés en toute traçabilité.",
+    "hero.badge":    "🍍 Exportateur de fruits & légumes frais",
+    "hero.title":    "<span class=\"grad\">Fruits &amp; légumes</span> frais venus du cœur de l'océan Indien",
+    "hero.subtitle": "De 🇲🇺 Maurice vers 🇫🇷 France — cueillis à maturité, livrés en toute traçabilité.",
     "hero.ctaPrimary":   "Découvrir nos produits",
     "hero.ctaSecondary": "Nous contacter",
-    "hero.motto":    "★ Étoile et Clé de l'océan Indien",
+    "hero.cardCaption":  "🌱 Nos plantations à Maurice",
 
     // Statistiques
     "stats.producers":     "Producteurs partenaires",

@@ -45,6 +45,7 @@ const SITE_CONFIG = {
      remplace simplement les valeurs ci-dessous par leur chemin.            */
   images: {
     hero:        "photo-1513415277900-a62401e19be4", // lagon de Maurice (Le Morne)
+    heroCard:    "photo-1707282399877-8d57c412c5c4", // carte "plantation" flottante (papayers)
     // Carrousel défilant de la section « À propos » (ajoute/retire des photos librement)
     aboutSlides: [
       "photo-1768734836361-68606214611c", // ananas au marché
