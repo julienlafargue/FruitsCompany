@@ -74,6 +74,10 @@
     // On expose aussi l'image hero en variable CSS (utilisée par .hero-bg)
     document.documentElement.style.setProperty("--hero-img", "url('" + resolveImage(im.hero, 1920) + "')");
 
+    // Carte "plantation" flottante par-dessus le fond Maurice
+    const heroCard = document.getElementById("heroCardImg");
+    if (heroCard && im.heroCard) heroCard.style.backgroundImage = "url('" + resolveImage(im.heroCard, 600, 420) + "')";
+
     const producersBg = document.getElementById("producersBg");
     if (producersBg) producersBg.style.backgroundImage = "url('" + resolveImage(im.producersBg, 1600) + "')";
 
