@@ -274,6 +274,12 @@ section {
 @keyframes swayB { 0%,100% { transform: scaleX(-1) rotate(12deg) translateY(0); } 50% { transform: scaleX(-1) rotate(6deg) translateY(12px); } }
 
 .hero .container { position: relative; z-index: 3; max-width: 900px; text-align: center; }
+/* Accroche "rôle" : dit d'emblée l'activité (exportateur de fruits & légumes) */
+.hero-role {
+  font-family: var(--font-heading); font-weight: 700; font-size: 0.9rem;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--flag-yellow);
+  margin-bottom: 14px; text-shadow: 0 2px 12px rgba(0,0,0,.45);
+}
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
   background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.34);
@@ -300,7 +306,7 @@ section {
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
   filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.6));
-  animation: flagWave 5s linear infinite; /* effet "drapeau mauricien qui flotte" */
+  animation: flagWave 12s linear infinite; /* "drapeau qui flotte" — doux et lent */
 }
 .hero-subtitle { font-size: clamp(1rem, 2.2vw, 1.28rem); opacity: .96; max-width: 660px; margin: 0 auto 34px; }
 .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 26px; }

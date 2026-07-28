@@ -26,6 +26,7 @@ const TRANSLATIONS = {
     "nav.cta":       "Contact us",
 
     // Hero
+    "hero.role":     "🍍 Fresh fruit & vegetable export specialist",
     "hero.badge":    "🇲🇺 Mauritius → 🇫🇷 France",
     "hero.title":    "Fresh <span class=\"grad\">fruits &amp; vegetables</span> from the heart of the Indian Ocean",
     "hero.subtitle": "We export the finest fresh produce of Mauritius directly to France — picked at ripeness, shipped with care, delivered with full traceability.",
@@ -126,6 +127,7 @@ const TRANSLATIONS = {
     "nav.cta":       "Nous contacter",
 
     // Hero
+    "hero.role":     "🍍 Spécialiste de l'export de fruits & légumes frais",
     "hero.badge":    "🇲🇺 Maurice → 🇫🇷 France",
     "hero.title":    "Fruits &amp; <span class=\"grad\">légumes frais</span> venus du cœur de l'océan Indien",
     "hero.subtitle": "Nous exportons les meilleurs produits frais de Maurice directement vers la France — cueillis à maturité, expédiés avec soin, livrés en toute traçabilité.",
