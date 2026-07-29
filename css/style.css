@@ -95,11 +95,10 @@ a:hover { color: var(--color-primary); }
 
 img { max-width: 100%; display: block; }
 
-/* Sections : hauteur ajustée au contenu (plus de grand vide en haut).
-   Le hero garde sa pleine hauteur via ses propres règles plus bas. */
+/* Desktop : chaque section fait au moins la taille de l'écran, contenu centré */
 section {
-  display: flex; flex-direction: column; justify-content: center;
-  padding: clamp(72px, 7vh, 104px) 0; position: relative;
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(80px, 8vh, 110px) 0; position: relative;
 }
 
 
