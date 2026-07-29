@@ -138,6 +138,8 @@
       img.src = SITE_CONFIG.company.logoImage;
       img.alt = SITE_CONFIG.company.name;
       img.className = "logo-img";
+      // Si le fichier n'existe pas encore → on affiche le dessin SVG de secours
+      img.onerror = function () { if (SITE_CONFIG.company.logoSvg) container.innerHTML = SITE_CONFIG.company.logoSvg; };
       container.appendChild(img);
     } else {
       const mark = document.createElement("span");
@@ -156,7 +158,7 @@
     const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     const setHref = (id, v) => { const el = document.getElementById(id); if (el) el.setAttribute("href", v); };
 
-    if (c.person) setText("infoPerson", c.role ? c.person + ", " + c.role : c.person);
+    if (c.person) setText("infoPerson", c.role ? c.person + " (" + c.role + ")" : c.person);
     setText("infoEmail", c.email); setHref("infoEmail", "mailto:" + c.email);
     setText("infoPhone", c.phone); setHref("infoPhone", "tel:" + c.phone.replace(/\s+/g, ""));
     setText("infoAddress", c.addressMauritius);
@@ -193,7 +195,6 @@
     if (!grid) return;
     grid.innerHTML = STATS.map((s) => `
       <div class="about-stat">
-        <div class="stat-icon">${s.icon || ""}</div>
         <div class="stat-value" data-target="${s.value}" data-suffix="${s.suffix || ""}">0${s.suffix || ""}</div>
         <div class="stat-label" data-i18n="${s.labelKey}">${t(s.labelKey)}</div>
       </div>`).join("");
@@ -216,7 +217,6 @@
               <span class="product-meta"><span class="pm-label">${t("products.season")}</span> ${p.season[currentLang]}</span>
               ${weight}
             </div>
-            <p class="product-desc">${p.desc[currentLang]}</p>
           </div>
         </article>`;
     }).join("");
@@ -414,10 +414,15 @@
     document.body.appendChild(nav);
 
     const dots = [...nav.querySelectorAll(".sn-dot")];
+    const headerLinks = [...document.querySelectorAll(".main-nav a[data-section]")];
     if ("IntersectionObserver" in window) {
       const io = new IntersectionObserver((entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) dots.forEach((d) => d.classList.toggle("active", d.dataset.id === e.target.id));
+          if (!e.isIntersecting) return;
+          const id = e.target.id;
+          dots.forEach((d) => d.classList.toggle("active", d.dataset.id === id));
+          // Surligne aussi l'onglet du header correspondant à la section
+          headerLinks.forEach((a) => a.classList.toggle("active", a.dataset.section === id));
         });
       }, { threshold: 0.5, rootMargin: "-20% 0px -20% 0px" });
       SECTION_NAV.forEach(([id]) => { const s = document.getElementById(id); if (s) io.observe(s); });

@@ -40,9 +40,9 @@ const TRANSLATIONS = {
 
     // À propos
     "about.kicker": "About us",
-    "about.title":  "Grown in Mauritius, exported with care",
-    "about.p1":     "Chi-Agri grows and exports fresh exotic fruit from Mauritius, mainly Victoria pineapple and passion fruit, from our own farms on the island.",
-    "about.p2":     "We handle everything from the field to the crate: we harvest at ripeness, pack quickly and ship so the fruit arrives fresh and full of flavour.",
+    "about.title":  "Grown and exported with care",
+    "about.p1":     "At Chi-Agri, we specialise in exporting premium exotic fruits from Mauritius. From the field to the crate, we manage every step of the process to ensure our fruit arrives fresh and of the highest quality.",
+    "about.p2":     "We focus exclusively on Victoria pineapples and Passion fruit, sourced directly from Mauritius and delivered to Rungis Market in France.",
 
     // Producteurs
     "producers.kicker": "Our producers",
@@ -145,9 +145,9 @@ const TRANSLATIONS = {
 
     // À propos
     "about.kicker": "À propos",
-    "about.title":  "Cultivé à Maurice, exporté avec soin",
-    "about.p1":     "Chi-Agri cultive et exporte des fruits exotiques frais de l'île Maurice, principalement l'ananas Victoria et le fruit de la passion, depuis ses propres fermes sur l'île.",
-    "about.p2":     "Nous gérons tout, du champ à la caisse : récolte à maturité, conditionnement rapide et expédition pour que le fruit arrive frais et plein de saveur.",
+    "about.title":  "Cultivé et exporté avec soin",
+    "about.p1":     "Chez Chi-Agri, nous sommes spécialisés dans l'export de fruits exotiques premium de l'île Maurice. Du champ à la caisse, nous gérons chaque étape pour garantir un fruit frais et de la plus haute qualité.",
+    "about.p2":     "Nous nous concentrons exclusivement sur l'ananas Victoria et le fruit de la passion, sourcés directement à Maurice et livrés au marché de Rungis en France.",
 
     // Producteurs
     "producers.kicker": "Nos producteurs",

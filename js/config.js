@@ -13,9 +13,10 @@ const SITE_CONFIG = {
     name: "Chi-Agri",
     nameText: "Chi-Agri",
     tagline: "Exporter of fresh exotic fruits",
-    // Logo : "svg" (dessin ci-dessous, s'adapte au fond) | "image" (fichier) | "text"
-    logoMode: "svg",
-    logoImage: "assets/logo.svg",      // utilisé seulement si logoMode = "image"
+    // Logo : "image" (ton fichier, ci-dessous) | "svg" (dessin de secours) | "text"
+    // ⭐ Dépose ton vrai logo (PNG/SVG à fond TRANSPARENT) sous ce chemin :
+    logoMode: "image",
+    logoImage: "assets/logo.png",      // ← ajoute ce fichier ; sinon le dessin SVG s'affiche
     // Logo vectoriel Chi-Agri : le texte suit la couleur (currentColor), le
     // globe garde ses couleurs. Remplaçable par ton vrai fichier (voir README).
     logoSvg: `<svg class="logo-svg" viewBox="0 0 372 88" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chi-Agri">
@@ -51,12 +52,12 @@ const SITE_CONFIG = {
   images: {
     hero:        "photo-1513415277900-a62401e19be4", // lagon de Maurice (Le Morne)
     heroCard:    "photo-1649960861739-113b8588eaf8", // carte flottante : ferme d'ananas
-    // Carrousel « À propos » : uniquement ananas / fruit de la passion + fermes
+    // Carrousel « À propos » : ananas Victoria + fruit de la passion appétissant
     aboutSlides: [
+      "photo-1781292428366-c61960596e2b", // ananas Victoria dorés
       "photo-1546546683-7fe6f2a456d3",    // champ d'ananas
-      "photo-1604360829141-704ec65eda94", // régime d'ananas sur pied
-      "photo-1628341423248-4b8c5c51a3cd", // fleur / vigne de passiflore
-      "photo-1502009285422-74e42ac2fd68", // fruit de la passion coupé
+      "photo-1502009285422-74e42ac2fd68", // fruit de la passion (pulpe juteuse)
+      "photo-1616077498072-ccba9b178fa5", // fruit de la passion coupé
     ],
   },
 

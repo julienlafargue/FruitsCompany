@@ -13,10 +13,10 @@
    suffix : "+", "%", "h"... ajouté après le nombre ("" si aucun)
    labelKey : clé de traduction (voir translations.js)                       */
 const STATS = [
-  { value: 2,   suffix: "+", icon: "🍍", labelKey: "stats.varieties" },   // ← 2+ fruits
-  { value: 48,  suffix: "h", icon: "⏱️", labelKey: "stats.freshness" },
-  { value: 100, suffix: "%", icon: "🌱", labelKey: "stats.ownfarms" },
-  { value: 100, suffix: "%", icon: "🛡️", labelKey: "stats.traceability" },
+  { value: 2,   suffix: "+", labelKey: "stats.varieties" },   // ← 2+ fruits
+  { value: 48,  suffix: "h", labelKey: "stats.freshness" },
+  { value: 100, suffix: "%", labelKey: "stats.ownfarms" },
+  { value: 100, suffix: "%", labelKey: "stats.traceability" },
 ];
 
 /* --- Produits ------------------------------------------------------------
@@ -36,7 +36,7 @@ const PRODUCTS = [
     },
   },
   {
-    img: "photo-1604495772376-9657f0035eb5",
+    img: "photo-1502009285422-74e42ac2fd68",
     emoji: "🟣",
     name:   { en: "Passion Fruit", fr: "Fruit de la Passion" },
     season: { en: "Year-round",    fr: "Toute l'année" },
