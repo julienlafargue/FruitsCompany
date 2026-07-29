@@ -26,7 +26,7 @@ const TRANSLATIONS = {
     "nav.cta":       "Contact us",
 
     // Hero
-    "hero.title":    "Fresh <span class=\"grad\">Fruit</span> from the heart of the Indian Ocean",
+    "hero.title":    "Fresh <span class=\"grad\">Fruits</span> from the heart of the Indian Ocean",
     "hero.tagline":  "Exporter of fresh exotic fruits",
     "hero.ctaPrimary":   "Discover our products",
     "hero.ctaSecondary": "Contact us",
@@ -35,7 +35,7 @@ const TRANSLATIONS = {
     // Statistiques
     "stats.varieties":     "Exotic fruits",
     "stats.freshness":     "Harvest to dispatch",
-    "stats.ownfarms":      "Grown on our own farms",
+    "stats.ownfarms":      "Grown in Mauritius",
     "stats.traceability":  "Traceable to the plot",
 
     // À propos
@@ -131,7 +131,7 @@ const TRANSLATIONS = {
     "nav.cta":       "Nous contacter",
 
     // Hero
-    "hero.title":    "<span class=\"grad\">Fruit</span> frais venu du cœur de l'océan Indien",
+    "hero.title":    "<span class=\"grad\">Fruits</span> frais venu du cœur de l'océan Indien",
     "hero.tagline":  "Exportateur de fruits exotiques frais",
     "hero.ctaPrimary":   "Découvrir nos produits",
     "hero.ctaSecondary": "Nous contacter",
@@ -140,7 +140,7 @@ const TRANSLATIONS = {
     // Statistiques
     "stats.varieties":     "Fruits exotiques",
     "stats.freshness":     "De la récolte à l'expédition",
-    "stats.ownfarms":      "Cultivés dans nos propres fermes",
+    "stats.ownfarms":      "Cultivé à l'île Maurice",
     "stats.traceability":  "Traçable jusqu'à la parcelle",
 
     // À propos

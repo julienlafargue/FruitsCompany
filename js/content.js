@@ -31,8 +31,8 @@ const PRODUCTS = [
     season: { en: "Year-round",         fr: "Toute l'année" },
     weight: "550-800 g",
     desc: {
-      en: "Grown on our own farms in Mauritius. Small, golden and very sweet, with a soft core and low acidity.",
-      fr: "Cultivé dans nos fermes à l'île Maurice. Petit, doré et très sucré, à cœur tendre et peu acide.",
+      en: "Grown on selected partner farms in Mauritius. Small, golden and very sweet, with a soft core and low acidity.",
+      fr: "Cultivé dans des fermes partenaires sélectionnées à l'île Maurice. Petit, doré et très sucré, à cœur tendre et peu acide.",
     },
   },
   {
