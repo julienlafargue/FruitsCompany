@@ -35,7 +35,7 @@ const TRANSLATIONS = {
     // Statistiques
     "stats.varieties":     "Exotic fruits",
     "stats.freshness":     "Harvest to dispatch",
-    "stats.ownfarms":      "Grown on our own farms",
+    "stats.ownfarms":      "Grown on our partner producers' farms",
     "stats.traceability":  "Traceable to the plot",
 
     // À propos
@@ -131,7 +131,7 @@ const TRANSLATIONS = {
     "nav.cta":       "Nous contacter",
 
     // Hero
-    "hero.title":    "<span class=\"grad\">Fruit</span> frais venu du cœur de l'océan Indien",
+    "hero.title":    "<span class=\"grad\">Fruits</span> frais venu du cœur de l'océan Indien",
     "hero.tagline":  "Exportateur de fruits exotiques frais",
     "hero.ctaPrimary":   "Découvrir nos produits",
     "hero.ctaSecondary": "Nous contacter",
@@ -140,7 +140,7 @@ const TRANSLATIONS = {
     // Statistiques
     "stats.varieties":     "Fruits exotiques",
     "stats.freshness":     "De la récolte à l'expédition",
-    "stats.ownfarms":      "Cultivés dans nos propres fermes",
+    "stats.ownfarms":      "Cultivés dans les fermes de nos producteurs associés",
     "stats.traceability":  "Traçable jusqu'à la parcelle",
 
     // À propos
