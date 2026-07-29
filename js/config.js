@@ -18,15 +18,15 @@ const SITE_CONFIG = {
     logoImage: "assets/logo.svg",      // utilisé seulement si logoMode = "image"
     // Logo vectoriel Chi-Agri : le texte suit la couleur (currentColor), le
     // globe garde ses couleurs. Remplaçable par ton vrai fichier (voir README).
-    logoSvg: `<svg class="logo-svg" viewBox="0 0 360 84" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chi-Agri">
-      <text x="0" y="64" fill="currentColor" font-family="'Bebas Neue', Impact, sans-serif" font-size="72" letter-spacing="4">CHI</text>
-      <g transform="translate(158,40)">
-        <circle r="33" fill="#3AA451"/>
-        <path d="M0,-33 A33,33 0 0,0 0,33 A16.5,16.5 0 0,0 0,0 A16.5,16.5 0 0,1 0,-33 Z" fill="#1B3FC4"/>
-        <circle cx="0" cy="-16.5" r="5.5" fill="#F2A81E"/>
-        <circle cx="0" cy="16.5" r="5.5" fill="#E5484D"/>
+    logoSvg: `<svg class="logo-svg" viewBox="0 0 372 88" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chi-Agri">
+      <text x="0" y="66" fill="currentColor" font-family="'Oswald', 'Arial Narrow', sans-serif" font-weight="300" font-size="70" letter-spacing="3">CHI</text>
+      <g transform="translate(160,42)">
+        <circle r="34" fill="#3AA451"/>
+        <path d="M0,-34 A34,34 0 0,0 0,34 A17,17 0 0,0 0,0 A17,17 0 0,1 0,-34 Z" fill="#1B3FC4"/>
+        <circle cx="0" cy="-17" r="5.5" fill="#F2A81E"/>
+        <circle cx="0" cy="17" r="5.5" fill="#E5484D"/>
       </g>
-      <text x="204" y="64" fill="currentColor" font-family="'Bebas Neue', Impact, sans-serif" font-size="72" letter-spacing="4">AGRI</text>
+      <text x="212" y="66" fill="currentColor" font-family="'Oswald', 'Arial Narrow', sans-serif" font-weight="300" font-size="70" letter-spacing="3">AGRI</text>
     </svg>`,
   },
 
