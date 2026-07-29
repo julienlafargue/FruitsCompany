@@ -13,10 +13,10 @@
    suffix : "+", "%", "h"... ajouté après le nombre ("" si aucun)
    labelKey : clé de traduction (voir translations.js)                       */
 const STATS = [
-  { value: 2,   suffix: "+", labelKey: "stats.varieties" },   // ← 2+ fruits
-  { value: 48,  suffix: "h", labelKey: "stats.freshness" },
-  { value: 100, suffix: "%", labelKey: "stats.ownfarms" },
-  { value: 100, suffix: "%", labelKey: "stats.traceability" },
+  { value: 2,   suffix: "+", labelKey: "stats.varieties",    icon: "🍍" },   // ← 2+ fruits
+  { value: 48,  suffix: "h", labelKey: "stats.freshness",    icon: "⏱️" },
+  { value: 100, suffix: "%", labelKey: "stats.ownfarms",     icon: "🇲🇺" },
+  { value: 100, suffix: "%", labelKey: "stats.traceability", icon: "📍" },
 ];
 
 /* --- Produits ------------------------------------------------------------
