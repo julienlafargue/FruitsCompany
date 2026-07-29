@@ -188,7 +188,9 @@ section {
   border-bottom-color: var(--color-border);
   box-shadow: 0 6px 24px rgba(20, 22, 58, 0.07);
 }
-.site-header .container { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 44px; }
+/* Le header s'étend sur toute la largeur → logo à gauche, langue à droite, aux extrémités */
+.site-header .container { max-width: none; padding: 0 clamp(20px, 3.5vw, 52px);
+  height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 44px; }
 
 /* --- État "en haut" (sur le hero) : logo, nav et actions en blanc --- */
 .site-header:not(.scrolled) .logo,
@@ -296,11 +298,17 @@ section {
   font-weight: 800;
   padding: 0 .04em;
   background-image: url("https://images.unsplash.com/photo-1587883012610-e3df17d41270?auto=format&fit=crop&w=800&q=70");
-  background-size: cover;
-  background-position: center 40%;
+  background-repeat: no-repeat;
+  background-size: 200% auto;                 /* zoom → laisse de la place pour dériver */
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
   filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.75));
+  animation: fruitDrift 9s ease-in-out infinite; /* la texture d'ananas dérive doucement */
+}
+/* Dérive douce de la texture de fruit dans les lettres */
+@keyframes fruitDrift {
+  0%, 100% { background-position: 0% 38%; }
+  50%      { background-position: 100% 62%; }
 }
 .hero-subtitle { font-size: clamp(1rem, 2.2vw, 1.28rem); opacity: .96; max-width: 620px; margin: 0 auto 34px; }
 /* Accroche sous le titre : « EXPORTER OF FRESH EXOTIC FRUITS » */
