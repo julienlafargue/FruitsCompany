@@ -19,14 +19,14 @@ const SITE_CONFIG = {
     // Logo vectoriel Chi-Agri : le texte suit la couleur (currentColor), le
     // globe garde ses couleurs. Remplaçable par ton vrai fichier (voir README).
     logoSvg: `<svg class="logo-svg" viewBox="0 0 360 84" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chi-Agri">
-      <text x="2" y="61" fill="currentColor" font-family="Georgia, 'Times New Roman', serif" font-size="56" letter-spacing="2">CHI</text>
-      <g transform="translate(150,42)">
-        <circle r="32" fill="#2FA84F"/>
-        <path d="M0,-32 A32,32 0 0,0 0,32 A16,16 0 0,0 0,0 A16,16 0 0,1 0,-32 Z" fill="#1B44C4"/>
-        <circle cx="0" cy="-16" r="5.5" fill="#F5A623"/>
-        <circle cx="0" cy="16" r="5.5" fill="#E5484D"/>
+      <text x="0" y="64" fill="currentColor" font-family="'Bebas Neue', Impact, sans-serif" font-size="72" letter-spacing="4">CHI</text>
+      <g transform="translate(158,40)">
+        <circle r="33" fill="#3AA451"/>
+        <path d="M0,-33 A33,33 0 0,0 0,33 A16.5,16.5 0 0,0 0,0 A16.5,16.5 0 0,1 0,-33 Z" fill="#1B3FC4"/>
+        <circle cx="0" cy="-16.5" r="5.5" fill="#F2A81E"/>
+        <circle cx="0" cy="16.5" r="5.5" fill="#E5484D"/>
       </g>
-      <text x="190" y="61" fill="currentColor" font-family="Georgia, 'Times New Roman', serif" font-size="56" letter-spacing="2">AGRI</text>
+      <text x="204" y="64" fill="currentColor" font-family="'Bebas Neue', Impact, sans-serif" font-size="72" letter-spacing="4">AGRI</text>
     </svg>`,
   },
 
@@ -70,8 +70,8 @@ const SITE_CONFIG = {
     url: "https://exemple-chi-agri.com/",              // ← ton domaine
     ogImage: "photo-1649960861739-113b8588eaf8",       // image de partage (ferme d'ananas)
     title: {
-      en: "Chi-Agri — Exporter of fresh exotic fruits from Mauritius",
-      fr: "Chi-Agri — Exportateur de fruits exotiques frais de l'île Maurice",
+      en: "Chi-Agri | Exporter of fresh exotic fruits from Mauritius",
+      fr: "Chi-Agri | Exportateur de fruits exotiques frais de l'île Maurice",
     },
     description: {
       en: "Chi-Agri is a Mauritian exporter of fresh exotic fruits: Victoria pineapple and passion fruit, grown on our own farms in Mauritius. Based in Port Louis.",
