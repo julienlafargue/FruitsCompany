@@ -26,7 +26,7 @@ const TRANSLATIONS = {
     "nav.cta":       "Contact us",
 
     // Hero
-    "hero.title":    "Fresh <span class=\"grad\">Fruit</span> from the heart of the Indian Ocean",
+    "hero.title":    "Fresh <span class=\"grad\">Fruits</span> from the heart of the Indian Ocean",
     "hero.tagline":  "Exporter of fresh exotic fruits",
     "hero.ctaPrimary":   "Discover our products",
     "hero.ctaSecondary": "Contact us",
