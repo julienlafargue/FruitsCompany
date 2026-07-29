@@ -519,7 +519,16 @@ section {
 .field select:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 15%, transparent); }
 /* Pages secondaires (inquiry) : le contenu passe sous le header fixe */
 .subpage-section { padding-top: calc(var(--header-height) + clamp(40px, 6vh, 80px)); }
-.inquiry-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: start; max-width: 980px; margin: 0 auto; }
+.inquiry-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: stretch; max-width: 980px; margin: 0 auto; }
+/* Carte "coordonnées" de la page inquiry : plus soignée et équilibrée
+   → occupe toute la hauteur du formulaire, infos aérées et séparées d'un filet. */
+.inquiry-grid .contact-info { display: flex; flex-direction: column; }
+.inquiry-grid .contact-info h3 { padding-bottom: 18px; margin-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,.22); }
+.inquiry-grid .contact-info .info-item { margin-bottom: 0; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,.14); }
+.inquiry-grid .contact-info .info-item:last-child { border-bottom: 0; }
+.inquiry-grid .contact-info .info-item .info-label { opacity: .7; margin-bottom: 4px; }
+.inquiry-grid .contact-info .info-item a,
+.inquiry-grid .contact-info .info-item span { font-size: 1.02rem; }
 .field label { font-weight: 600; font-size: 0.9rem; }
 .field input, .field textarea {
   font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text);
@@ -612,7 +621,8 @@ section {
   .nav-toggle { display: block; }
   /* Menu déroulant : panneau pleine largeur, propre et arrondi en bas */
   .main-nav {
-    position: fixed; inset: var(--header-height) 0 auto 0; width: 100vw; flex-direction: column; align-items: stretch; gap: 0; margin: 0;
+    position: fixed; top: var(--header-height); left: 0; right: 0; bottom: auto;
+    width: 100%; flex-direction: column; align-items: stretch; gap: 0; margin: 0;
     background: var(--color-surface); padding: 6px 0 8px;
     border-top: 1px solid var(--color-border);
     box-shadow: 0 18px 40px rgba(20, 22, 58, .16);
