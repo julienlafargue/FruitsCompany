@@ -29,7 +29,7 @@ const PRODUCTS = [
     emoji: "🍍",
     name:   { en: "Victoria Pineapple", fr: "Ananas Victoria" },
     season: { en: "Year-round",         fr: "Toute l'année" },
-    weight: "550–800 g",
+    weight: "550-800 g",
     desc: {
       en: "Grown on our own farms in Mauritius. Small, golden and very sweet, with a soft core and low acidity.",
       fr: "Cultivé dans nos fermes à l'île Maurice. Petit, doré et très sucré, à cœur tendre et peu acide.",
@@ -40,7 +40,7 @@ const PRODUCTS = [
     emoji: "🟣",
     name:   { en: "Passion Fruit", fr: "Fruit de la Passion" },
     season: { en: "Year-round",    fr: "Toute l'année" },
-    weight: "550–800 g",
+    weight: "550-800 g",
     desc: {
       en: "Deep purple skin and bright, aromatic pulp. Grown in Mauritius and hand-picked when fully ripe.",
       fr: "Peau pourpre et pulpe parfumée. Cultivé à l'île Maurice et cueilli à la main à pleine maturité.",

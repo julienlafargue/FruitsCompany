@@ -289,26 +289,18 @@ section {
   margin-bottom: 26px; backdrop-filter: blur(6px);
 }
 .hero h1 { font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.22; margin-bottom: 22px; text-shadow: 0 4px 24px rgba(0,0,0,.28); }
-/* Mot clé surligné : police "fantaisie" (Pacifico), un peu plus grosse,
-   avec un dégradé AUX COULEURS DU DRAPEAU MAURICIEN (sans contour). */
+/* Mot clé « Fruit » : les lettres sont remplies d'une TEXTURE D'ANANAS
+   (background-clip: text) → le mot évoque littéralement le fruit.
+   Change l'image ci-dessous pour un autre fruit si besoin. */
 .hero h1 .grad {
-  font-family: "Pacifico", "Poppins", cursive;
-  font-weight: 400;
-  font-size: 1.2em;          /* légèrement plus gros que le reste du titre */
-  line-height: 1;
-  padding: 0 .06em;
-  /* Les 4 bandes du drapeau, répétées → boucle sans couture quand elles défilent */
-  background: linear-gradient(100deg,
-    var(--flag-red)    0%,
-    var(--flag-blue)   25%,
-    var(--flag-yellow) 50%,
-    var(--flag-green)  75%,
-    var(--flag-red)    100%);
-  background-size: 300% 100%;
+  font-weight: 800;
+  padding: 0 .04em;
+  background-image: url("https://images.unsplash.com/photo-1587883012610-e3df17d41270?auto=format&fit=crop&w=800&q=70");
+  background-size: cover;
+  background-position: center 40%;
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
-  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.6));
-  animation: flagWave 12s linear infinite; /* "drapeau qui flotte" — doux et lent */
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.75));
 }
 .hero-subtitle { font-size: clamp(1rem, 2.2vw, 1.28rem); opacity: .96; max-width: 620px; margin: 0 auto 34px; }
 /* Accroche sous le titre : « EXPORTER OF FRESH EXOTIC FRUITS » */

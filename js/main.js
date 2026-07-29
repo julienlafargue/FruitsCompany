@@ -156,7 +156,7 @@
     const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     const setHref = (id, v) => { const el = document.getElementById(id); if (el) el.setAttribute("href", v); };
 
-    if (c.person) setText("infoPerson", c.role ? c.person + " · " + c.role : c.person);
+    if (c.person) setText("infoPerson", c.role ? c.person + ", " + c.role : c.person);
     setText("infoEmail", c.email); setHref("infoEmail", "mailto:" + c.email);
     setText("infoPhone", c.phone); setHref("infoPhone", "tel:" + c.phone.replace(/\s+/g, ""));
     setText("infoAddress", c.addressMauritius);
@@ -209,7 +209,6 @@
         <article class="product-card">
           <div class="product-media">
             <div class="pm-img" style="background-image:url('${img}')"></div>
-            <span class="pm-emoji">${p.emoji}</span>
           </div>
           <div class="product-body">
             <h3>${p.name[currentLang]}</h3>
@@ -307,8 +306,8 @@
       const name = val("name"), email = val("email"), company = val("company");
       const product = val("product"), quantity = val("quantity"), message = val("message");
       const brand = SITE_CONFIG.company.nameText || SITE_CONFIG.company.name;
-      const subject = `[${brand}] Inquiry — ${name || email}`;
-      let body = `${message}\n\n— — —\nName: ${name}\nEmail: ${email}\nCompany: ${company}`;
+      const subject = `[${brand}] Inquiry: ${name || email}`;
+      let body = `${message}\n\n-----\nName: ${name}\nEmail: ${email}\nCompany: ${company}`;
       if (product) body += `\nProduct: ${product}`;
       if (quantity) body += `\nQuantity: ${quantity}`;
       window.location.href =
