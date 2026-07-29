@@ -140,7 +140,7 @@ const TRANSLATIONS = {
     // Statistiques
     "stats.varieties":     "Fruits exotiques",
     "stats.freshness":     "De la récolte à l'expédition",
-    "stats.ownfarms":      "Cultivés dans les fermes de nos producteurs associés",
+    "stats.ownfarms":      "Cultivé dans les fermes de nos producteurs associés",
     "stats.traceability":  "Traçable jusqu'à la parcelle",
 
     // À propos
