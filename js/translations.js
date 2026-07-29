@@ -35,14 +35,14 @@ const TRANSLATIONS = {
     // Statistiques
     "stats.varieties":     "Exotic fruits",
     "stats.freshness":     "Harvest to dispatch",
-    "stats.ownfarms":      "Grown on our partner producers' farms",
+    "stats.ownfarms":      "Grown in Mauritius",
     "stats.traceability":  "Traceable to the plot",
 
     // À propos
     "about.kicker": "About us",
     "about.title":  "Grown in Mauritius, exported with care",
-    "about.p1":     "Chi-Agri grows and exports fresh exotic fruit from Mauritius, mainly Victoria pineapple and passion fruit, from our own farms on the island.",
-    "about.p2":     "We handle everything from the field to the crate: we harvest at ripeness, pack quickly and ship so the fruit arrives fresh and full of flavour.",
+    "about.p1":     "Chi-Agri exports fresh exotic fruit from Mauritius, mainly Victoria pineapple and passion fruit, from our own farms on the island.",
+    "about.p2":     "We handle everything from the field to the crate: pack quickly and ship so the fruit arrives fresh and full of flavour.",
 
     // Producteurs
     "producers.kicker": "Our producers",
@@ -140,14 +140,14 @@ const TRANSLATIONS = {
     // Statistiques
     "stats.varieties":     "Fruits exotiques",
     "stats.freshness":     "De la récolte à l'expédition",
-    "stats.ownfarms":      "Cultivé dans les fermes de nos producteurs associés",
+    "stats.ownfarms":      "Cultivé à l'île Maurice",
     "stats.traceability":  "Traçable jusqu'à la parcelle",
 
     // À propos
     "about.kicker": "À propos",
     "about.title":  "Cultivé à Maurice, exporté avec soin",
-    "about.p1":     "Chi-Agri cultive et exporte des fruits exotiques frais de l'île Maurice, principalement l'ananas Victoria et le fruit de la passion, depuis ses propres fermes sur l'île.",
-    "about.p2":     "Nous gérons tout, du champ à la caisse : récolte à maturité, conditionnement rapide et expédition pour que le fruit arrive frais et plein de saveur.",
+    "about.p1":     "Chi-Agri exporte des fruits exotiques frais de l'île Maurice, principalement l'ananas Victoria et le fruit de la passion, depuis ses propres fermes sur l'île.",
+    "about.p2":     "Nous gérons tout, du champ à la caisse : conditionnement rapide et expédition pour que le fruit arrive frais et plein de saveur.",
 
     // Producteurs
     "producers.kicker": "Nos producteurs",
