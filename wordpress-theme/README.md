@@ -53,7 +53,8 @@ npx @wordpress/env stop
 
 1. Crée un site WordPress dans **Local**.
 2. Copie le dossier `chi-agri/` dans `wp-content/themes/`.
-3. Active le thème, installe ACF + Polylang, crée une Page de slug `inquiry`.
+3. Active le thème, installe ACF + Polylang. La page « Inquiry » est créée
+   automatiquement à l'activation du thème.
 
 ## Mise en ligne
 

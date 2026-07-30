@@ -14,6 +14,29 @@ require_once get_theme_file_path( 'inc/cpt-products.php' );
 require_once get_theme_file_path( 'inc/acf-fields.php' );
 require_once get_theme_file_path( 'inc/inquiry-form.php' );
 
+/* --- Provisionnement à l'activation du thème ------------------------------- */
+add_action( 'after_switch_theme', 'chi_provision_pages' );
+
+/**
+ * Crée la page « Inquiry » (slug = inquiry → utilise page-inquiry.php) si elle
+ * n'existe pas encore, afin que le formulaire fonctionne dès l'activation du
+ * thème, sans dépendre de l'outil de dev mu-plugins/chi-seed.php.
+ */
+function chi_provision_pages() {
+	if ( get_page_by_path( 'inquiry' ) ) {
+		return;
+	}
+	wp_insert_post(
+		array(
+			'post_title'   => 'Inquiry',
+			'post_name'    => 'inquiry',
+			'post_status'  => 'publish',
+			'post_type'    => 'page',
+			'post_content' => '',
+		)
+	);
+}
+
 /* --- Supports du thème ----------------------------------------------------- */
 add_action( 'after_setup_theme', 'chi_setup' );
 
