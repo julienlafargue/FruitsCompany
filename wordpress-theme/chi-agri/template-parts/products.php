@@ -11,8 +11,8 @@ $chi_products = chi_get_products();
 <section id="products" class="mesh">
 	<div class="container">
 		<div class="section-head reveal">
-			<span class="kicker"><?php echo esc_html( chi_t( 'Our products' ) ); ?></span>
-			<h2><?php echo esc_html( chi_t( 'Our fruit' ) ); ?></h2>
+			<span class="kicker"><?php echo esc_html( chi_txt( 'products_kicker' ) ); ?></span>
+			<h2><?php echo esc_html( chi_txt( 'products_title' ) ); ?></h2>
 		</div>
 		<div class="products-grid stagger" id="productsGrid">
 			<?php foreach ( $chi_products as $p ) : ?>
@@ -27,10 +27,10 @@ $chi_products = chi_get_products();
 						<h3><?php echo esc_html( $p['name'] ); ?></h3>
 						<div class="product-specs">
 							<?php if ( ! empty( $p['season'] ) ) : ?>
-								<span class="product-meta"><span class="pm-label"><?php echo esc_html( chi_t( 'Season' ) ); ?></span> <?php echo esc_html( $p['season'] ); ?></span>
+								<span class="product-meta"><span class="pm-label"><?php echo esc_html( chi_txt( 'label_season' ) ); ?></span> <?php echo esc_html( $p['season'] ); ?></span>
 							<?php endif; ?>
 							<?php if ( ! empty( $p['weight'] ) ) : ?>
-								<span class="product-meta"><span class="pm-label"><?php echo esc_html( chi_t( 'Weight' ) ); ?></span> <?php echo esc_html( $p['weight'] ); ?></span>
+								<span class="product-meta"><span class="pm-label"><?php echo esc_html( chi_txt( 'label_weight' ) ); ?></span> <?php echo esc_html( $p['weight'] ); ?></span>
 							<?php endif; ?>
 						</div>
 						<?php if ( ! empty( $p['desc'] ) ) : ?>

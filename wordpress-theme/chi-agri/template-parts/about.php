@@ -11,10 +11,10 @@ $chi_stats  = chi_stats();
 <section id="about" class="mesh">
 	<div class="container about-grid">
 		<div class="about-text reveal">
-			<span class="kicker"><?php echo esc_html( chi_t( 'About us' ) ); ?></span>
-			<h2><?php echo esc_html( chi_t( 'Grown and exported with care' ) ); ?></h2>
-			<p><?php echo esc_html( chi_t( 'At Chi-Agri, we specialise in exporting premium exotic fruits from Mauritius. From the field to the crate, we manage every step of the process to ensure our fruit arrives fresh and of the highest quality.' ) ); ?></p>
-			<p><?php echo esc_html( chi_t( 'We focus exclusively on Victoria pineapples and Passion fruit, sourced directly from Mauritius and delivered to Rungis Market in France.' ) ); ?></p>
+			<span class="kicker"><?php echo esc_html( chi_txt( 'about_kicker' ) ); ?></span>
+			<h2><?php echo esc_html( chi_txt( 'about_title' ) ); ?></h2>
+			<p><?php echo esc_html( chi_txt( 'about_p1' ) ); ?></p>
+			<p><?php echo esc_html( chi_txt( 'about_p2' ) ); ?></p>
 		</div>
 		<div class="about-visual reveal">
 			<div class="carousel" id="aboutCarousel" aria-label="Photos">
