@@ -2,21 +2,69 @@
 /**
  * helpers.php — Fonctions utilitaires du thème Chi-Agri.
  *
- * Objectif : rendre le contenu éditable via ACF/Polylang tout en gardant des
- * valeurs par défaut identiques au site statique. Ainsi, le thème affiche le
- * site complet même sur une installation vierge (sans ACF configuré).
+ * Système bilingue AUTONOME (sans dépendre de Polylang) :
+ *  - la langue courante vient d'un cookie (basculé par ?lang=fr / ?lang=en) ;
+ *  - chaque texte a une version EN et une version FR, éditables dans l'admin
+ *    (menu « Chi-Agri »), avec repli sur le contenu actuel du site.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/* ==========================================================================
+   LANGUE
+   ========================================================================== */
+
+/**
+ * Bascule la langue si ?lang=xx est présent (pose un cookie) — appelé sur init.
+ */
+function chi_maybe_set_lang() {
+	if ( isset( $_GET['lang'] ) ) {
+		$lang = 'fr' === $_GET['lang'] ? 'fr' : 'en';
+		setcookie( 'chi_lang', $lang, time() + YEAR_IN_SECONDS, COOKIEPATH ? COOKIEPATH : '/' );
+		$_COOKIE['chi_lang'] = $lang;
+	}
+}
+add_action( 'init', 'chi_maybe_set_lang' );
+
+/**
+ * Langue courante : 'en' ou 'fr'.
+ *
+ * @return string
+ */
+function chi_lang() {
+	if ( isset( $_COOKIE['chi_lang'] ) && in_array( $_COOKIE['chi_lang'], array( 'en', 'fr' ), true ) ) {
+		return $_COOKIE['chi_lang'];
+	}
+	$def = chi_field( 'default_lang', 'en', 'option' );
+	return 'fr' === $def ? 'fr' : 'en';
+}
+
+/**
+ * Lien de bascule de langue (vers l'AUTRE langue) + libellé (drapeau).
+ *
+ * @return array { url, label }
+ */
+function chi_language_switch() {
+	$other = 'fr' === chi_lang() ? 'en' : 'fr';
+	$flags = array( 'en' => '🇬🇧 EN', 'fr' => '🇫🇷 FR' );
+	return array(
+		'url'   => esc_url_raw( add_query_arg( 'lang', $other ) ),
+		'label' => $flags[ $other ],
+	);
+}
+
+/* ==========================================================================
+   CHAMPS ACF (avec repli sur valeurs par défaut)
+   ========================================================================== */
+
 /**
  * Lit un champ ACF avec repli sur une valeur par défaut.
  *
  * @param string $name    Nom du champ ACF.
- * @param mixed  $default Valeur par défaut (contenu actuel du site).
- * @param mixed  $post_id ID de post ou 'option' (page d'options ACF).
+ * @param mixed  $default Valeur par défaut.
+ * @param mixed  $post_id ID de post ou 'option'.
  * @return mixed
  */
 function chi_field( $name, $default = '', $post_id = false ) {
@@ -29,39 +77,105 @@ function chi_field( $name, $default = '', $post_id = false ) {
 	return $default;
 }
 
+/* ==========================================================================
+   TEXTES BILINGUES
+   ========================================================================== */
+
 /**
- * Traduit une chaîne d'interface via Polylang si présent, sinon renvoie la
- * chaîne telle quelle. Enregistrée côté admin via pll_register_string().
+ * Dictionnaire des textes éditables : clé => { label, en, fr }.
+ * Les valeurs EN/FR servent de défaut (= contenu actuel du site) ET de
+ * valeur pré-remplie dans l'admin. Le titre du hero met le mot surligné
+ * entre accolades { } (dégradé animé).
  *
- * @param string $text Texte source (langue par défaut).
- * @return string
+ * @return array
  */
-function chi_t( $text ) {
-	if ( function_exists( 'pll__' ) ) {
-		return pll__( $text );
-	}
-	return $text;
+function chi_text_defaults() {
+	return array(
+		// Hero
+		'hero_title'    => array( 'label' => 'Hero — titre (mot surligné entre { })', 'en' => 'Fresh {Fruits} from the heart of the Indian Ocean', 'fr' => "{Fruits} frais venu du cœur de l'océan Indien" ),
+		'hero_tagline'  => array( 'label' => 'Hero — accroche', 'en' => 'Exporter of fresh exotic fruits', 'fr' => 'Exportateur de fruits exotiques frais' ),
+		'btn_discover'  => array( 'label' => 'Bouton — découvrir', 'en' => 'Discover our products', 'fr' => 'Découvrir nos produits' ),
+		'btn_contact'   => array( 'label' => 'Bouton — contact', 'en' => 'Contact us', 'fr' => 'Nous contacter' ),
+		// Navigation
+		'nav_about'     => array( 'label' => 'Menu — à propos', 'en' => 'About', 'fr' => 'À propos' ),
+		'nav_products'  => array( 'label' => 'Menu — produits', 'en' => 'Products', 'fr' => 'Produits' ),
+		'nav_contact'   => array( 'label' => 'Menu — contact', 'en' => 'Contact us', 'fr' => 'Nous contacter' ),
+		// À propos
+		'about_kicker'  => array( 'label' => 'À propos — étiquette', 'en' => 'About us', 'fr' => 'À propos' ),
+		'about_title'   => array( 'label' => 'À propos — titre', 'en' => 'Grown and exported with care', 'fr' => 'Cultivé et exporté avec soin' ),
+		'about_p1'      => array( 'label' => 'À propos — paragraphe 1', 'en' => 'At Chi-Agri, we specialise in exporting premium exotic fruits from Mauritius. From the field to the crate, we manage every step of the process to ensure our fruit arrives fresh and of the highest quality.', 'fr' => "Chez Chi-Agri, nous sommes spécialisés dans l'export de fruits exotiques premium de l'île Maurice. Du champ à la caisse, nous gérons chaque étape pour garantir un fruit frais et de la plus haute qualité." ),
+		'about_p2'      => array( 'label' => 'À propos — paragraphe 2', 'en' => 'We focus exclusively on Victoria pineapples and Passion fruit, sourced directly from Mauritius and delivered to Rungis Market in France.', 'fr' => "Nous nous concentrons exclusivement sur l'ananas Victoria et le fruit de la passion, sourcés directement à Maurice et livrés au marché de Rungis en France." ),
+		// Produits
+		'products_kicker' => array( 'label' => 'Produits — étiquette', 'en' => 'Our products', 'fr' => 'Nos produits' ),
+		'products_title'  => array( 'label' => 'Produits — titre', 'en' => 'Our fruit', 'fr' => 'Nos fruits' ),
+		'label_season'    => array( 'label' => 'Libellé — saison', 'en' => 'Season', 'fr' => 'Saison' ),
+		'label_weight'    => array( 'label' => 'Libellé — poids', 'en' => 'Weight', 'fr' => 'Poids' ),
+		// Contact (accueil)
+		'contact_kicker'  => array( 'label' => 'Contact — étiquette', 'en' => 'Contact', 'fr' => 'Contact' ),
+		'contact_title'   => array( 'label' => 'Contact — titre', 'en' => 'Get in touch', 'fr' => 'Contactez-nous' ),
+		'contact_intro'   => array( 'label' => 'Contact — intro', 'en' => 'Importer, wholesaler or distributor? Send us an inquiry.', 'fr' => 'Importateur, grossiste ou distributeur ? Envoyez-nous une demande.' ),
+		'contact_send'    => array( 'label' => 'Contact — bouton demande', 'en' => 'Send an inquiry', 'fr' => 'Envoyer une demande' ),
+		'info_title'      => array( 'label' => 'Coordonnées — titre', 'en' => 'Our contact details', 'fr' => 'Nos coordonnées' ),
+		'info_contact'    => array( 'label' => 'Coordonnées — contact', 'en' => 'Contact', 'fr' => 'Contact' ),
+		'info_email'      => array( 'label' => 'Coordonnées — email', 'en' => 'Email', 'fr' => 'Email' ),
+		'info_phone'      => array( 'label' => 'Coordonnées — téléphone', 'en' => 'Phone', 'fr' => 'Téléphone' ),
+		'info_address'    => array( 'label' => 'Coordonnées — adresse', 'en' => 'Address', 'fr' => 'Adresse' ),
+		// Page demande + formulaire
+		'inquiry_kicker'  => array( 'label' => 'Demande — étiquette', 'en' => 'Inquiry', 'fr' => 'Demande' ),
+		'inquiry_title'   => array( 'label' => 'Demande — titre', 'en' => 'Send us an inquiry', 'fr' => 'Envoyez-nous une demande' ),
+		'inquiry_intro'   => array( 'label' => 'Demande — intro', 'en' => "Tell us which fruit and quantity you're interested in.", 'fr' => 'Indiquez-nous le fruit et la quantité qui vous intéressent.' ),
+		'form_name'       => array( 'label' => 'Formulaire — nom', 'en' => 'Your name', 'fr' => 'Votre nom' ),
+		'form_name_ph'    => array( 'label' => 'Formulaire — nom (indice)', 'en' => 'Full name', 'fr' => 'Nom complet' ),
+		'form_email'      => array( 'label' => 'Formulaire — email', 'en' => 'Your email', 'fr' => 'Votre email' ),
+		'form_company'    => array( 'label' => 'Formulaire — société', 'en' => 'Company', 'fr' => 'Société' ),
+		'form_company_ph' => array( 'label' => 'Formulaire — société (indice)', 'en' => 'Company name', 'fr' => 'Nom de la société' ),
+		'form_product'    => array( 'label' => 'Formulaire — produit', 'en' => 'Product of interest', 'fr' => 'Produit concerné' ),
+		'form_quantity'   => array( 'label' => 'Formulaire — quantité', 'en' => 'Quantity', 'fr' => 'Quantité' ),
+		'form_quantity_ph'=> array( 'label' => 'Formulaire — quantité (indice)', 'en' => 'e.g. pallets / tonnes', 'fr' => 'ex. palettes / tonnes' ),
+		'form_message'    => array( 'label' => 'Formulaire — message', 'en' => 'Message', 'fr' => 'Message' ),
+		'form_message_ph' => array( 'label' => 'Formulaire — message (indice)', 'en' => 'Your message', 'fr' => 'Votre message' ),
+		'form_submit'     => array( 'label' => 'Formulaire — bouton', 'en' => 'Send inquiry', 'fr' => 'Envoyer la demande' ),
+		'notice_ok'       => array( 'label' => 'Formulaire — message succès', 'en' => 'Thanks! Your inquiry has been sent.', 'fr' => 'Merci ! Votre demande a bien été envoyée.' ),
+		'notice_error'    => array( 'label' => 'Formulaire — message erreur', 'en' => 'Sorry, something went wrong. Please try again or email us directly.', 'fr' => "Désolé, une erreur est survenue. Réessayez ou écrivez-nous directement." ),
+		// Footer
+		'footer_tagline'  => array( 'label' => 'Footer — accroche', 'en' => 'Exporter of fresh exotic fruits', 'fr' => 'Exportateur de fruits exotiques frais' ),
+		'footer_nav'      => array( 'label' => 'Footer — titre navigation', 'en' => 'Navigation', 'fr' => 'Navigation' ),
+		'footer_contact'  => array( 'label' => 'Footer — titre contact', 'en' => 'Contact', 'fr' => 'Contact' ),
+		'footer_rights'   => array( 'label' => 'Footer — droits', 'en' => 'All rights reserved.', 'fr' => 'Tous droits réservés.' ),
+		'footer_made'     => array( 'label' => 'Footer — signature', 'en' => 'Grown and exported with care from Mauritius', 'fr' => "Cultivé et exporté avec soin depuis l'île Maurice" ),
+	);
 }
 
 /**
- * Résout une valeur d'image en URL utilisable — équivalent du resolveImage()
- * du site statique.
- *  - Identifiant Unsplash "photo-xxxx"  → URL Unsplash redimensionnée
- *  - ID de pièce jointe WordPress (int) → URL de la taille demandée
- *  - Chemin "assets/..." ou URL absolue → renvoyé tel quel (préfixé du thème
- *    si chemin relatif d'assets)
+ * Renvoie un texte dans la langue courante : valeur éditée (ACF) sinon défaut.
  *
- * @param mixed $src Valeur d'image.
- * @param int   $w   Largeur souhaitée.
- * @param int   $h   Hauteur souhaitée (0 = auto).
+ * @param string $key Clé du dictionnaire.
  * @return string
+ */
+function chi_txt( $key ) {
+	$lang = chi_lang();
+	$val  = chi_field( 'txt_' . $key . '_' . $lang, '', 'option' );
+	if ( '' !== $val ) {
+		return $val;
+	}
+	$defaults = chi_text_defaults();
+	if ( isset( $defaults[ $key ] ) ) {
+		return isset( $defaults[ $key ][ $lang ] ) ? $defaults[ $key ][ $lang ] : $defaults[ $key ]['en'];
+	}
+	return '';
+}
+
+/* ==========================================================================
+   IMAGES / DONNÉES
+   ========================================================================== */
+
+/**
+ * Résout une valeur d'image en URL (ID pièce jointe, "photo-…" Unsplash, URL).
  */
 function chi_image_url( $src, $w = 1200, $h = 0 ) {
 	if ( empty( $src ) ) {
 		return '';
 	}
-
-	// Pièce jointe WordPress (ID numérique ou tableau ACF image).
 	if ( is_array( $src ) && isset( $src['url'] ) ) {
 		return $src['url'];
 	}
@@ -69,24 +183,18 @@ function chi_image_url( $src, $w = 1200, $h = 0 ) {
 		$url = wp_get_attachment_image_url( (int) $src, 'full' );
 		return $url ? $url : '';
 	}
-
-	// Identifiant Unsplash.
 	if ( 0 === strpos( $src, 'photo-' ) ) {
 		$size = 'auto=format&fit=crop&q=75&w=' . intval( $w ) . ( $h ? '&h=' . intval( $h ) : '' );
 		return 'https://images.unsplash.com/' . $src . '?' . $size;
 	}
-
-	// Chemin d'assets du thème.
 	if ( 0 === strpos( $src, 'assets/' ) ) {
 		return get_theme_file_uri( $src );
 	}
-
-	// URL absolue ou autre chemin : renvoyé tel quel.
 	return $src;
 }
 
 /**
- * Coordonnées de contact (page d'options ACF), avec valeurs par défaut.
+ * Coordonnées de contact (identiques dans les deux langues).
  *
  * @return array
  */
@@ -101,36 +209,18 @@ function chi_contact() {
 }
 
 /**
- * Chiffres clés (repeater ACF), avec valeurs par défaut = contenu actuel.
+ * Chiffres clés (repeater ACF, libellé bilingue), défaut = contenu actuel.
  *
  * @return array[] { value, suffix, icon, label }
  */
 function chi_stats() {
+	$lang = chi_lang();
+
 	$default = array(
-		array(
-			'value'  => 2,
-			'suffix' => '+',
-			'icon'   => '🍍',
-			'label'  => chi_t( 'Exotic fruits' ),
-		),
-		array(
-			'value'  => 48,
-			'suffix' => 'h',
-			'icon'   => '⏱️',
-			'label'  => chi_t( 'Harvest to dispatch' ),
-		),
-		array(
-			'value'  => 100,
-			'suffix' => '%',
-			'icon'   => '🇲🇺',
-			'label'  => chi_t( 'Grown in Mauritius' ),
-		),
-		array(
-			'value'  => 100,
-			'suffix' => '%',
-			'icon'   => '📍',
-			'label'  => chi_t( 'Traceable to the plot' ),
-		),
+		array( 'value' => 2, 'suffix' => '+', 'icon' => '🍍', 'label' => 'en' === $lang ? 'Exotic fruits' : 'Fruits exotiques' ),
+		array( 'value' => 48, 'suffix' => 'h', 'icon' => '⏱️', 'label' => 'en' === $lang ? 'Harvest to dispatch' : "De la récolte à l'expédition" ),
+		array( 'value' => 100, 'suffix' => '%', 'icon' => '🇲🇺', 'label' => 'en' === $lang ? 'Grown in Mauritius' : "Cultivé à l'île Maurice" ),
+		array( 'value' => 100, 'suffix' => '%', 'icon' => '📍', 'label' => 'en' === $lang ? 'Traceable to the plot' : "Traçable jusqu'à la parcelle" ),
 	);
 
 	$rows = chi_field( 'stats', array(), 'option' );
@@ -140,21 +230,21 @@ function chi_stats() {
 
 	$out = array();
 	foreach ( $rows as $r ) {
+		$label = isset( $r[ 'label_' . $lang ] ) ? $r[ 'label_' . $lang ] : ( isset( $r['label_en'] ) ? $r['label_en'] : '' );
 		$out[] = array(
 			'value'  => isset( $r['value'] ) ? $r['value'] : 0,
 			'suffix' => isset( $r['suffix'] ) ? $r['suffix'] : '',
 			'icon'   => isset( $r['icon'] ) ? $r['icon'] : '',
-			'label'  => isset( $r['label'] ) ? $r['label'] : '',
+			'label'  => $label,
 		);
 	}
 	return $out;
 }
 
 /**
- * Slides du carrousel « À propos ». Champ ACF (galerie ou repeater d'images)
- * avec repli sur les identifiants Unsplash actuels.
+ * Slides du carrousel « À propos ».
  *
- * @return array Liste de valeurs d'image (ID pièce jointe, "photo-…", URL).
+ * @return array
  */
 function chi_about_slides() {
 	$default = array(
@@ -167,14 +257,10 @@ function chi_about_slides() {
 	if ( empty( $slides ) || ! is_array( $slides ) ) {
 		return $default;
 	}
-	// Normalise (galerie ACF = tableaux d'images, ou IDs).
 	return array_map(
 		function ( $s ) {
 			if ( is_array( $s ) && isset( $s['ID'] ) ) {
 				return (int) $s['ID'];
-			}
-			if ( is_array( $s ) && isset( $s['image'] ) ) {
-				return $s['image'];
 			}
 			return $s;
 		},
@@ -183,9 +269,9 @@ function chi_about_slides() {
 }
 
 /**
- * Image de fond du hero, avec repli.
+ * Image de fond du hero.
  *
- * @return string valeur d'image (ID, "photo-…" ou URL).
+ * @return string
  */
 function chi_hero_image() {
 	return chi_field( 'hero_image', 'photo-1513415277900-a62401e19be4', 'option' );

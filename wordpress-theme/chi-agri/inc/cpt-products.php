@@ -61,40 +61,48 @@ function chi_get_products() {
 		)
 	);
 
+	$lang = chi_lang();
+
 	if ( $query->have_posts() ) {
 		$out = array();
 		foreach ( $query->posts as $post ) {
 			$thumb = get_post_thumbnail_id( $post->ID );
+			$name  = chi_field( 'product_name_' . $lang, '', $post->ID );
 			$out[] = array(
-				'name'   => get_the_title( $post ),
+				'name'   => $name ? $name : get_the_title( $post ),
 				'img'    => $thumb ? (int) $thumb : chi_field( 'product_img_src', '', $post->ID ),
-				'season' => chi_field( 'product_season', '', $post->ID ),
+				'season' => chi_field( 'product_season_' . $lang, '', $post->ID ),
 				'weight' => chi_field( 'product_weight', '', $post->ID ),
 				'emoji'  => chi_field( 'product_emoji', '', $post->ID ),
-				'desc'   => chi_field( 'product_desc', '', $post->ID ),
+				'desc'   => chi_field( 'product_desc_' . $lang, '', $post->ID ),
 			);
 		}
 		wp_reset_postdata();
 		return $out;
 	}
 
-	// Repli : contenu par défaut = js/content.js actuel.
+	// Repli : contenu par défaut = js/content.js actuel (bilingue).
+	$fr = 'fr' === $lang;
 	return array(
 		array(
-			'name'   => chi_t( 'Victoria Pineapple' ),
+			'name'   => $fr ? 'Ananas Victoria' : 'Victoria Pineapple',
 			'img'    => 'photo-1490885578174-acda8905c2c6',
-			'season' => chi_t( 'Year-round' ),
+			'season' => $fr ? "Toute l'année" : 'Year-round',
 			'weight' => '550-800 g',
 			'emoji'  => '🍍',
-			'desc'   => chi_t( 'Grown on selected partner farms in Mauritius. Small, golden and very sweet, with a soft core and low acidity.' ),
+			'desc'   => $fr
+				? "Cultivé dans des fermes partenaires sélectionnées à l'île Maurice. Petit, doré et très sucré, à cœur tendre et peu acide."
+				: 'Grown on selected partner farms in Mauritius. Small, golden and very sweet, with a soft core and low acidity.',
 		),
 		array(
-			'name'   => chi_t( 'Passion Fruit' ),
+			'name'   => $fr ? 'Fruit de la Passion' : 'Passion Fruit',
 			'img'    => 'photo-1502009285422-74e42ac2fd68',
-			'season' => chi_t( 'Year-round' ),
+			'season' => $fr ? "Toute l'année" : 'Year-round',
 			'weight' => '550-800 g',
 			'emoji'  => '🟣',
-			'desc'   => chi_t( 'Deep purple skin and bright, aromatic pulp. Grown in Mauritius and hand-picked when fully ripe.' ),
+			'desc'   => $fr
+				? "Peau pourpre et pulpe parfumée. Cultivé à l'île Maurice et cueilli à la main à pleine maturité."
+				: 'Deep purple skin and bright, aromatic pulp. Grown in Mauritius and hand-picked when fully ripe.',
 		),
 	);
 }

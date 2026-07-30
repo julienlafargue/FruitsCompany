@@ -54,15 +54,15 @@ $chi_lang     = function_exists( 'chi_language_switch' ) ? chi_language_switch()
 				?>
 				<a href="<?php echo esc_url( home_url( '/#about' ) ); ?>" data-section="about">
 					<span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20C4 12 9 5 20 4c0 11-7 16-16 16z"/><path d="M4 20c3-6 7-9 11-11"/></svg></span>
-					<span><?php echo esc_html( chi_t( 'About us' ) ); ?></span>
+					<span><?php echo esc_html( chi_txt( 'nav_about' ) ); ?></span>
 				</a>
 				<a href="<?php echo esc_url( home_url( '/#products' ) ); ?>" data-section="products">
 					<span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 10.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8z"/><path d="M9 8l1.5-4"/><path d="M15 8l-1.5-4"/></svg></span>
-					<span><?php echo esc_html( chi_t( 'Our products' ) ); ?></span>
+					<span><?php echo esc_html( chi_txt( 'nav_products' ) ); ?></span>
 				</a>
 				<a href="<?php echo esc_url( $inquiry_url ); ?>" data-section="contact">
 					<span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
-					<span><?php echo esc_html( chi_t( 'Contact us' ) ); ?></span>
+					<span><?php echo esc_html( chi_txt( 'nav_contact' ) ); ?></span>
 				</a>
 				<?php
 			}

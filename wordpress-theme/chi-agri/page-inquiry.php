@@ -17,15 +17,15 @@ $sent         = isset( $_GET['sent'] ) ? sanitize_key( wp_unslash( $_GET['sent']
 <section id="inquiry" class="mesh subpage-section">
 	<div class="container">
 		<div class="section-head reveal">
-			<span class="kicker"><?php echo esc_html( chi_t( 'Inquiry' ) ); ?></span>
-			<h2><?php echo esc_html( chi_t( 'Send us an inquiry' ) ); ?></h2>
-			<p><?php echo esc_html( chi_t( "Tell us which fruit and quantity you're interested in." ) ); ?></p>
+			<span class="kicker"><?php echo esc_html( chi_txt( 'inquiry_kicker' ) ); ?></span>
+			<h2><?php echo esc_html( chi_txt( 'inquiry_title' ) ); ?></h2>
+			<p><?php echo esc_html( chi_txt( 'inquiry_intro' ) ); ?></p>
 		</div>
 
 		<?php if ( 'ok' === $sent ) : ?>
-			<p class="form-notice form-notice--ok"><?php echo esc_html( chi_t( 'Thanks! Your inquiry has been sent.' ) ); ?></p>
+			<p class="form-notice form-notice--ok"><?php echo esc_html( chi_txt( 'notice_ok' ) ); ?></p>
 		<?php elseif ( 'error' === $sent ) : ?>
-			<p class="form-notice form-notice--error"><?php echo esc_html( chi_t( 'Sorry, something went wrong. Please try again or email us directly.' ) ); ?></p>
+			<p class="form-notice form-notice--error"><?php echo esc_html( chi_txt( 'notice_error' ) ); ?></p>
 		<?php endif; ?>
 
 		<div class="inquiry-grid reveal">
@@ -34,20 +34,20 @@ $sent         = isset( $_GET['sent'] ) ? sanitize_key( wp_unslash( $_GET['sent']
 				<?php wp_nonce_field( 'chi_inquiry', 'chi_inquiry_nonce' ); ?>
 
 				<div class="field">
-					<label for="cf-name"><?php echo esc_html( chi_t( 'Your name' ) ); ?></label>
-					<input type="text" id="cf-name" name="name" placeholder="<?php echo esc_attr( chi_t( 'Full name' ) ); ?>" required />
+					<label for="cf-name"><?php echo esc_html( chi_txt( 'form_name' ) ); ?></label>
+					<input type="text" id="cf-name" name="name" placeholder="<?php echo esc_attr( chi_txt( 'form_name_ph' ) ); ?>" required />
 				</div>
 				<div class="field">
-					<label for="cf-email"><?php echo esc_html( chi_t( 'Your email' ) ); ?></label>
+					<label for="cf-email"><?php echo esc_html( chi_txt( 'form_email' ) ); ?></label>
 					<input type="email" id="cf-email" name="email" placeholder="you@company.com" required />
 				</div>
 				<div class="field">
-					<label for="cf-company"><?php echo esc_html( chi_t( 'Company' ) ); ?></label>
-					<input type="text" id="cf-company" name="company" placeholder="<?php echo esc_attr( chi_t( 'Company name' ) ); ?>" />
+					<label for="cf-company"><?php echo esc_html( chi_txt( 'form_company' ) ); ?></label>
+					<input type="text" id="cf-company" name="company" placeholder="<?php echo esc_attr( chi_txt( 'form_company_ph' ) ); ?>" />
 				</div>
 				<div class="field-row">
 					<div class="field">
-						<label for="cf-product"><?php echo esc_html( chi_t( 'Product of interest' ) ); ?></label>
+						<label for="cf-product"><?php echo esc_html( chi_txt( 'form_product' ) ); ?></label>
 						<select id="cf-product" name="product">
 							<?php foreach ( $chi_products as $p ) : ?>
 								<option value="<?php echo esc_attr( $p['name'] ); ?>"><?php echo esc_html( $p['name'] ); ?></option>
@@ -55,33 +55,33 @@ $sent         = isset( $_GET['sent'] ) ? sanitize_key( wp_unslash( $_GET['sent']
 						</select>
 					</div>
 					<div class="field">
-						<label for="cf-quantity"><?php echo esc_html( chi_t( 'Quantity' ) ); ?></label>
-						<input type="text" id="cf-quantity" name="quantity" placeholder="<?php echo esc_attr( chi_t( 'e.g. pallets / tonnes' ) ); ?>" />
+						<label for="cf-quantity"><?php echo esc_html( chi_txt( 'form_quantity' ) ); ?></label>
+						<input type="text" id="cf-quantity" name="quantity" placeholder="<?php echo esc_attr( chi_txt( 'form_quantity_ph' ) ); ?>" />
 					</div>
 				</div>
 				<div class="field">
-					<label for="cf-message"><?php echo esc_html( chi_t( 'Message' ) ); ?></label>
-					<textarea id="cf-message" name="message" placeholder="<?php echo esc_attr( chi_t( 'Your message' ) ); ?>"></textarea>
+					<label for="cf-message"><?php echo esc_html( chi_txt( 'form_message' ) ); ?></label>
+					<textarea id="cf-message" name="message" placeholder="<?php echo esc_attr( chi_txt( 'form_message_ph' ) ); ?>"></textarea>
 				</div>
-				<button type="submit" class="btn btn-primary"><?php echo esc_html( chi_t( 'Send inquiry' ) ); ?></button>
+				<button type="submit" class="btn btn-primary"><?php echo esc_html( chi_txt( 'form_submit' ) ); ?></button>
 			</form>
 
 			<aside class="contact-info">
-				<h3><?php echo esc_html( chi_t( 'Our contact details' ) ); ?></h3>
+				<h3><?php echo esc_html( chi_txt( 'info_title' ) ); ?></h3>
 				<div class="info-item">
-					<div class="info-label"><?php echo esc_html( chi_t( 'Contact' ) ); ?></div>
+					<div class="info-label"><?php echo esc_html( chi_txt( 'info_contact' ) ); ?></div>
 					<span><?php echo esc_html( trim( $chi_contact['person'] . ( $chi_contact['role'] ? ' (' . $chi_contact['role'] . ')' : '' ) ) ); ?></span>
 				</div>
 				<div class="info-item">
-					<div class="info-label"><?php echo esc_html( chi_t( 'Email' ) ); ?></div>
+					<div class="info-label"><?php echo esc_html( chi_txt( 'info_email' ) ); ?></div>
 					<a href="mailto:<?php echo esc_attr( $chi_contact['email'] ); ?>"><?php echo esc_html( $chi_contact['email'] ); ?></a>
 				</div>
 				<div class="info-item">
-					<div class="info-label"><?php echo esc_html( chi_t( 'Phone' ) ); ?></div>
+					<div class="info-label"><?php echo esc_html( chi_txt( 'info_phone' ) ); ?></div>
 					<a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $chi_contact['phone'] ) ); ?>"><?php echo esc_html( $chi_contact['phone'] ); ?></a>
 				</div>
 				<div class="info-item">
-					<div class="info-label"><?php echo esc_html( chi_t( 'Address' ) ); ?></div>
+					<div class="info-label"><?php echo esc_html( chi_txt( 'info_address' ) ); ?></div>
 					<span><?php echo esc_html( $chi_contact['address'] ); ?></span>
 				</div>
 			</aside>

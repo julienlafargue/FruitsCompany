@@ -14,17 +14,29 @@ avec un **contenu entièrement éditable** depuis l'admin WordPress et un suppor
 | Image du hero + carrousel « À propos » | Menu **Chi-Agri** |
 | Chiffres clés (2+, 48h, 100%…) | Menu **Chi-Agri** → répéteur « Chiffres clés » |
 | Produits (nom, photo, saison, poids, description) | Menu **Produits** (chaque produit = 1 fiche) |
-| Textes d'interface + traductions FR | **Langues → Traductions de chaînes** (Polylang) |
+| **Tous les textes** (titres, paragraphes, boutons, formulaire) en **EN et FR** | menu **« Chi-Agri » → onglet « Textes »** |
 | Formulaire de demande | fonctionne d'origine (envoi email `wp_mail`) |
 
 > Le thème affiche le **contenu actuel par défaut** même sans rien configurer :
 > chaque champ retombe sur la valeur du site statique.
 
-## Plugins recommandés (gratuits)
+## Bilingue EN/FR (autonome, sans Polylang)
 
-- **Advanced Custom Fields** — champs éditables (coordonnées, chiffres, produits)
-- **Polylang** — bilingue EN/FR
+Le thème gère lui-même les deux langues :
+- chaque texte a un champ **EN** et un champ **FR** dans **Chi-Agri → Textes** ;
+- le bouton **🇫🇷 FR / 🇬🇧 EN** du header bascule la langue (via `?lang=fr`/`?lang=en`,
+  mémorisé par cookie) ;
+- la **langue par défaut** se règle dans **Chi-Agri → Général**.
+
+Les produits ont aussi des champs **Nom / Saison / Description** en EN et FR.
+
+## Plugins requis / recommandés (gratuits)
+
+- **Advanced Custom Fields** — *requis* pour éditer le contenu (sinon, le thème
+  affiche les valeurs par défaut mais rien n'est modifiable dans l'admin)
 - (optionnel) **Yoast SEO** ou **Rank Math** — balises SEO
+
+> Polylang n'est **plus nécessaire** : le bilingue est intégré au thème.
 
 ## Tester en local
 
@@ -53,7 +65,8 @@ npx @wordpress/env stop
 
 1. Crée un site WordPress dans **Local**.
 2. Copie le dossier `chi-agri/` dans `wp-content/themes/`.
-3. Active le thème, installe ACF + Polylang, crée une Page de slug `inquiry`.
+3. Active le thème, installe ACF + Polylang. La page « Inquiry » est créée
+   automatiquement à l'activation du thème.
 
 ## Mise en ligne
 

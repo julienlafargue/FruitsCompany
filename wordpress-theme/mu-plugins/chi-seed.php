@@ -37,21 +37,39 @@ function chi_seed_content() {
 	// Produits de démonstration (repli identique au site statique).
 	$products = array(
 		array(
-			'title'  => 'Victoria Pineapple',
-			'season' => 'Year-round',
-			'weight' => '550-800 g',
-			'emoji'  => '🍍',
-			'img'    => 'photo-1490885578174-acda8905c2c6',
-			'desc'   => 'Grown on selected partner farms in Mauritius. Small, golden and very sweet, with a soft core and low acidity.',
+			'title'     => 'Victoria Pineapple',
+			'name_fr'   => 'Ananas Victoria',
+			'season_en' => 'Year-round',
+			'season_fr' => "Toute l'année",
+			'weight'    => '550-800 g',
+			'emoji'     => '🍍',
+			'img'       => 'photo-1490885578174-acda8905c2c6',
+			'desc_en'   => 'Grown on selected partner farms in Mauritius. Small, golden and very sweet, with a soft core and low acidity.',
+			'desc_fr'   => "Cultivé dans des fermes partenaires sélectionnées à l'île Maurice. Petit, doré et très sucré, à cœur tendre et peu acide.",
 		),
 		array(
-			'title'  => 'Passion Fruit',
-			'season' => 'Year-round',
-			'weight' => '550-800 g',
-			'emoji'  => '🟣',
-			'img'    => 'photo-1502009285422-74e42ac2fd68',
-			'desc'   => 'Deep purple skin and bright, aromatic pulp. Grown in Mauritius and hand-picked when fully ripe.',
+			'title'     => 'Passion Fruit',
+			'name_fr'   => 'Fruit de la Passion',
+			'season_en' => 'Year-round',
+			'season_fr' => "Toute l'année",
+			'weight'    => '550-800 g',
+			'emoji'     => '🟣',
+			'img'       => 'photo-1502009285422-74e42ac2fd68',
+			'desc_en'   => 'Deep purple skin and bright, aromatic pulp. Grown in Mauritius and hand-picked when fully ripe.',
+			'desc_fr'   => "Peau pourpre et pulpe parfumée. Cultivé à l'île Maurice et cueilli à la main à pleine maturité.",
 		),
+	);
+
+	// Meta → clé de champ ACF (pour que get_field reconnaisse les valeurs).
+	$refs = array(
+		'product_name_fr'   => 'field_chi_product_name_fr',
+		'product_img_src'   => 'field_chi_product_img_src',
+		'product_emoji'     => 'field_chi_product_emoji',
+		'product_weight'    => 'field_chi_product_weight',
+		'product_season_en' => 'field_chi_product_season_en',
+		'product_season_fr' => 'field_chi_product_season_fr',
+		'product_desc_en'   => 'field_chi_product_desc_en',
+		'product_desc_fr'   => 'field_chi_product_desc_fr',
 	);
 
 	$existing = get_posts( array( 'post_type' => 'chi_product', 'numberposts' => 1, 'fields' => 'ids' ) );
@@ -66,12 +84,20 @@ function chi_seed_content() {
 				)
 			);
 			if ( $id && ! is_wp_error( $id ) ) {
-				// Champs (ACF si présent, sinon meta simple lue par chi_field fallback).
-				update_post_meta( $id, 'product_season', $p['season'] );
-				update_post_meta( $id, 'product_weight', $p['weight'] );
-				update_post_meta( $id, 'product_emoji', $p['emoji'] );
-				update_post_meta( $id, 'product_img_src', $p['img'] );
-				update_post_meta( $id, 'product_desc', $p['desc'] );
+				$meta = array(
+					'product_name_fr'   => $p['name_fr'],
+					'product_img_src'   => $p['img'],
+					'product_emoji'     => $p['emoji'],
+					'product_weight'    => $p['weight'],
+					'product_season_en' => $p['season_en'],
+					'product_season_fr' => $p['season_fr'],
+					'product_desc_en'   => $p['desc_en'],
+					'product_desc_fr'   => $p['desc_fr'],
+				);
+				foreach ( $meta as $k => $v ) {
+					update_post_meta( $id, $k, $v );
+					update_post_meta( $id, '_' . $k, $refs[ $k ] );
+				}
 			}
 		}
 	}

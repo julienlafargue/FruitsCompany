@@ -14,6 +14,29 @@ require_once get_theme_file_path( 'inc/cpt-products.php' );
 require_once get_theme_file_path( 'inc/acf-fields.php' );
 require_once get_theme_file_path( 'inc/inquiry-form.php' );
 
+/* --- Provisionnement à l'activation du thème ------------------------------- */
+add_action( 'after_switch_theme', 'chi_provision_pages' );
+
+/**
+ * Crée la page « Inquiry » (slug = inquiry → utilise page-inquiry.php) si elle
+ * n'existe pas encore, afin que le formulaire fonctionne dès l'activation du
+ * thème, sans dépendre de l'outil de dev mu-plugins/chi-seed.php.
+ */
+function chi_provision_pages() {
+	if ( get_page_by_path( 'inquiry' ) ) {
+		return;
+	}
+	wp_insert_post(
+		array(
+			'post_title'   => 'Inquiry',
+			'post_name'    => 'inquiry',
+			'post_status'  => 'publish',
+			'post_type'    => 'page',
+			'post_content' => '',
+		)
+	);
+}
+
 /* --- Supports du thème ----------------------------------------------------- */
 add_action( 'after_setup_theme', 'chi_setup' );
 
@@ -74,88 +97,7 @@ function chi_enqueue_assets() {
 	);
 }
 
-/* --- Polylang : enregistrement des chaînes d'interface --------------------- */
-add_action( 'init', 'chi_register_strings' );
-
-function chi_register_strings() {
-	if ( ! function_exists( 'pll_register_string' ) ) {
-		return;
-	}
-	$strings = array(
-		'Fresh %s from the heart of the Indian Ocean',
-		'Fruits',
-		'Discover our products',
-		'Contact us',
-		'Exporter of fresh exotic fruits',
-		'Grown and exported with care',
-		"At Chi-Agri, we specialise in exporting premium exotic fruits from Mauritius. From the field to the crate, we manage every step of the process to ensure our fruit arrives fresh and of the highest quality.",
-		'We focus exclusively on Victoria pineapples and Passion fruit, sourced directly from Mauritius and delivered to Rungis Market in France.',
-		'About us',
-		'Our products',
-		'Our fruit',
-		'Season',
-		'Weight',
-		'Year-round',
-		'Contact',
-		'Get in touch',
-		'Importer, wholesaler or distributor? Send us an inquiry.',
-		'Send an inquiry',
-		'Our contact details',
-		'Email',
-		'Phone',
-		'Address',
-		'Inquiry',
-		'Send us an inquiry',
-		"Tell us which fruit and quantity you're interested in.",
-		'Navigation',
-		'All rights reserved.',
-		'Grown and exported with care from Mauritius',
-		'Exotic fruits',
-		'Harvest to dispatch',
-		'Grown in Mauritius',
-		'Traceable to the plot',
-		'Victoria Pineapple',
-		'Passion Fruit',
-		'Your name',
-		'Full name',
-		'Your email',
-		'Company',
-		'Company name',
-		'Product of interest',
-		'Quantity',
-		'e.g. pallets / tonnes',
-		'Message',
-		'Your message',
-		'Send inquiry',
-		'Thanks! Your inquiry has been sent.',
-		'Sorry, something went wrong. Please try again or email us directly.',
-		'Grown on selected partner farms in Mauritius. Small, golden and very sweet, with a soft core and low acidity.',
-		'Deep purple skin and bright, aromatic pulp. Grown in Mauritius and hand-picked when fully ripe.',
-	);
-	foreach ( $strings as $s ) {
-		pll_register_string( 'chi-agri', $s, 'Chi-Agri', strlen( $s ) > 60 );
-	}
-}
-
-/**
- * Sélecteur de langue (EN/FR) rendu dans le header, si Polylang est actif.
- * Renvoie l'URL vers l'autre langue et son libellé (drapeau).
- *
- * @return array|null { url, label }
+/*
+ * NB : la gestion bilingue (EN/FR) est autonome — voir inc/helpers.php
+ * (chi_lang, chi_txt, chi_language_switch). Polylang n'est plus requis.
  */
-function chi_language_switch() {
-	if ( ! function_exists( 'pll_the_languages' ) || ! function_exists( 'pll_current_language' ) ) {
-		return null;
-	}
-	$langs = pll_the_languages( array( 'raw' => 1, 'hide_current' => 1 ) );
-	if ( empty( $langs ) ) {
-		return null;
-	}
-	$other = reset( $langs );
-	$flags = array( 'en' => '🇬🇧 EN', 'fr' => '🇫🇷 FR' );
-	$slug  = isset( $other['slug'] ) ? $other['slug'] : '';
-	return array(
-		'url'   => isset( $other['url'] ) ? $other['url'] : '#',
-		'label' => isset( $flags[ $slug ] ) ? $flags[ $slug ] : strtoupper( $slug ),
-	);
-}
