@@ -135,7 +135,11 @@
       container.innerHTML = SITE_CONFIG.company.logoSvg;
     } else if (SITE_CONFIG.company.logoMode === "image") {
       const img = document.createElement("img");
-      img.src = SITE_CONFIG.company.logoImage;
+      // Footer (fond sombre) → variante à texte blanc si disponible
+      const isFooter = container.id === "footerLogo";
+      img.src = (isFooter && SITE_CONFIG.company.logoImageFooter)
+        ? SITE_CONFIG.company.logoImageFooter
+        : SITE_CONFIG.company.logoImage;
       img.alt = SITE_CONFIG.company.name;
       img.className = "logo-img";
       // Si le fichier n'existe pas encore → on affiche le dessin SVG de secours
