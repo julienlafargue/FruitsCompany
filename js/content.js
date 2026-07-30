@@ -25,7 +25,7 @@ const STATS = [
    weight : poids indicatif par fruit (affiché sur la carte)                 */
 const PRODUCTS = [
   {
-    img: "photo-1694592014176-0ef0c28274f2",
+    img: "photo-1490885578174-acda8905c2c6",
     emoji: "🍍",
     name:   { en: "Victoria Pineapple", fr: "Ananas Victoria" },
     season: { en: "Year-round",         fr: "Toute l'année" },
