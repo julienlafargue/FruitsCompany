@@ -54,8 +54,8 @@ const SITE_CONFIG = {
     heroCard:    "photo-1649960861739-113b8588eaf8", // carte flottante : ferme d'ananas
     // Carrousel « À propos » : ananas Victoria + fruit de la passion appétissant
     aboutSlides: [
-      "photo-1781292428366-c61960596e2b", // ananas Victoria dorés
-      "photo-1546546683-7fe6f2a456d3",    // champ d'ananas
+      "photo-1694592014176-0ef0c28274f2", // ananas Victoria doré (petit, mûr)
+      "photo-1589990423411-5b2cebc1ab3f", // ananas Victoria sur pied
       "photo-1502009285422-74e42ac2fd68", // fruit de la passion (pulpe juteuse)
       "photo-1616077498072-ccba9b178fa5", // fruit de la passion coupé
     ],
