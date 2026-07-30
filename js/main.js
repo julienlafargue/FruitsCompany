@@ -195,6 +195,7 @@
     if (!grid) return;
     grid.innerHTML = STATS.map((s) => `
       <div class="about-stat">
+        ${s.icon ? `<div class="stat-icon" aria-hidden="true">${s.icon}</div>` : ""}
         <div class="stat-value" data-target="${s.value}" data-suffix="${s.suffix || ""}">0${s.suffix || ""}</div>
         <div class="stat-label" data-i18n="${s.labelKey}">${t(s.labelKey)}</div>
       </div>`).join("");
