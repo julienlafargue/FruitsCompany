@@ -55,9 +55,9 @@ const SITE_CONFIG = {
     // Carrousel « À propos » : ananas Victoria + fruit de la passion appétissant
     aboutSlides: [
       "photo-1694592014176-0ef0c28274f2", // ananas Victoria doré (petit, mûr)
-      "photo-1589990423411-5b2cebc1ab3f", // ananas Victoria sur pied
+      "photo-1576380021180-4b60fb58e7ea", // ananas Victoria dorés mûrs
       "photo-1502009285422-74e42ac2fd68", // fruit de la passion (pulpe juteuse)
-      "photo-1616077498072-ccba9b178fa5", // fruit de la passion coupé
+      "photo-1562157244-acec728ea5b2",    // fruits de la passion coupés
     ],
   },
 
