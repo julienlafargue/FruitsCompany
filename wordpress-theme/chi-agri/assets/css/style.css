@@ -1,0 +1,667 @@
+/* ==========================================================================
+   style.css — FEUILLE DE STYLE PRINCIPALE
+   --------------------------------------------------------------------------
+   Sommaire :
+     1. Variables de thème (:root)  ← ⭐ change les couleurs ICI
+     2. Palettes alternatives        ← dont le drapeau mauricien
+     3. Reset & base
+     4. Animations (keyframes) & utilitaire d'apparition au scroll
+     5. Utilitaires de mise en page
+     6. Header / navigation
+     7. Boutons
+     8. Hero (image plein écran + fruits flottants + blobs)
+     9. Marquee (ruban défilant)
+    10. Statistiques (compteurs animés)
+    11. À propos
+    12. Producteurs (cartes cliquables) + fenêtre détaillée (modal)
+    13. Produits (cartes photo)
+    14. Pourquoi Maurice → France
+    15. Contact
+    16. Footer
+    17. Sélecteur de palettes (widget flottant)
+    18. Responsive
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. VARIABLES DE THÈME — PALETTE PAR DÉFAUT « TROPICAL »
+   ⭐ Pour changer les couleurs du site, modifie simplement ces valeurs.
+   ========================================================================== */
+:root {
+  /* Couleurs de marque — DRAPEAU DE L'ÎLE MAURICE 🇲🇺 (teintes officielles) */
+  --flag-red:    #EA2839;
+  --flag-blue:   #1A206D;
+  --flag-yellow: #FFD500;
+  --flag-green:  #00A551;
+
+  --color-primary:     var(--flag-green);   /* vert   */
+  --color-secondary:   var(--flag-blue);    /* bleu   */
+  --color-accent:      var(--flag-yellow);  /* jaune  */
+  --color-accent-warm: var(--flag-red);     /* rouge  */
+  --color-highlight:   var(--flag-red);     /* rouge  */
+
+  /* Fonds & textes */
+  --color-bg:        #FFFFFF;
+  --color-bg-alt:    #F5F7FC;
+  --color-surface:   #FFFFFF;
+  --color-text:      #14163A;
+  --color-text-soft: #565A79;
+  --color-border:    #E3E6F0;
+
+  /* Dégradés */
+  --gradient-hero:   linear-gradient(135deg, var(--flag-blue), var(--flag-green));
+  --gradient-sun:    linear-gradient(120deg, var(--flag-red), var(--flag-yellow));
+  /* Dégradé "drapeau" complet : rouge → bleu → jaune → vert */
+  --gradient-flag:   linear-gradient(120deg, var(--flag-red), var(--flag-blue) 34%, var(--flag-yellow) 67%, var(--flag-green));
+  --gradient-rainbow:var(--gradient-flag);
+  --color-on-brand:  #FFFFFF;
+
+  /* Typographie */
+  --font-heading: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --font-body:    "Inter", "Segoe UI", system-ui, sans-serif;
+
+  /* Mise en page */
+  --max-width:   1180px;
+  --radius:      20px;
+  --radius-sm:   12px;
+  --shadow:      0 12px 34px rgba(16, 36, 31, 0.09);
+  --shadow-hover:0 22px 48px rgba(16, 36, 31, 0.18);
+  --transition:  0.28s cubic-bezier(.22,.61,.36,1);
+  --header-height: 74px;
+}
+
+/* ==========================================================================
+   3. RESET & BASE
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); }
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background var(--transition), color var(--transition);
+}
+body.no-scroll { overflow: hidden; }
+
+h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.14; font-weight: 700; }
+
+a { color: var(--color-secondary); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--color-primary); }
+
+img { max-width: 100%; display: block; }
+
+/* Desktop : chaque section fait au moins la taille de l'écran, contenu centré */
+section {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(80px, 8vh, 110px) 0; position: relative;
+}
+
+
+/* ==========================================================================
+   4. ANIMATIONS & APPARITION AU SCROLL
+   ========================================================================== */
+@keyframes floatY { 0%,100% { transform: translateY(0) rotate(var(--r,0deg)); } 50% { transform: translateY(-22px) rotate(var(--r,0deg)); } }
+@keyframes blobMove { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(30px,-20px) scale(1.1); } 66% { transform: translate(-20px,20px) scale(.95); } }
+@keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+/* Ondulation "drapeau qui flotte" : les bandes de couleur défilent en boucle */
+@keyframes flagWave { from { background-position: 0% 50%; } to { background-position: 300% 50%; } }
+@keyframes popIn { from { opacity: 0; transform: scale(.94) translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes bounceArrow { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+/* Élément masqué puis révélé quand il entre dans le viewport (via main.js) */
+.reveal { opacity: 0; transform: translateY(34px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,.61,.36,1); }
+.reveal.in-view { opacity: 1; transform: none; }
+/* Décalage en cascade pour les grilles */
+.stagger > *      { opacity: 0; transform: translateY(34px); transition: opacity .6s ease, transform .6s cubic-bezier(.22,.61,.36,1); }
+.stagger.in-view > * { opacity: 1; transform: none; }
+.stagger.in-view > *:nth-child(2) { transition-delay: .08s; }
+.stagger.in-view > *:nth-child(3) { transition-delay: .16s; }
+.stagger.in-view > *:nth-child(4) { transition-delay: .24s; }
+.stagger.in-view > *:nth-child(5) { transition-delay: .32s; }
+.stagger.in-view > *:nth-child(6) { transition-delay: .40s; }
+.stagger.in-view > *:nth-child(7) { transition-delay: .48s; }
+.stagger.in-view > *:nth-child(8) { transition-delay: .56s; }
+
+
+/* ==========================================================================
+   5. UTILITAIRES DE MISE EN PAGE
+   ========================================================================== */
+.container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+.section-head { max-width: 720px; margin: 0 auto 40px; text-align: center; }
+
+.kicker {
+  display: inline-block; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #fff;
+  background: var(--gradient-sun); padding: 7px 16px; border-radius: 100px; margin-bottom: 18px;
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--color-accent-warm) 40%, transparent);
+}
+.section-head h2 { font-size: clamp(1.9rem, 4.4vw, 2.7rem); margin-bottom: 16px; }
+.section-head p  { color: var(--color-text-soft); font-size: 1.06rem; }
+
+/* Titres en MAJUSCULES (About, Our Fruit, Get in touch, Our contact details, footer) */
+.section-head h2,
+.about-text h2,
+.contact-info h3,
+.footer-brand p,
+.footer-bottom span:last-child { text-transform: uppercase; }
+
+.bg-alt { background: var(--color-bg-alt); }
+
+/* Fond décoratif "mesh" coloré très doux pour certaines sections */
+.mesh { position: relative; }
+.mesh::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .5;
+  background:
+    radial-gradient(40% 50% at 12% 18%, color-mix(in srgb, var(--color-accent) 34%, transparent), transparent 70%),
+    radial-gradient(38% 46% at 88% 22%, color-mix(in srgb, var(--color-secondary) 30%, transparent), transparent 70%),
+    radial-gradient(45% 55% at 78% 90%, color-mix(in srgb, var(--color-highlight) 22%, transparent), transparent 70%);
+}
+/* Texture "feuilles tropicales" en filigrane → univers fruit / île Maurice */
+.mesh::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("../assets/pattern-leaves.svg");
+  background-size: 300px;
+}
+.mesh > * { position: relative; z-index: 1; }
+
+
+/* ==========================================================================
+   6. HEADER / NAVIGATION
+   ========================================================================== */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--header-height);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+/* Liseré = drapeau mauricien en dégradé (rouge → bleu → jaune → vert) */
+.site-header::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 2;
+  background: linear-gradient(90deg,
+    var(--flag-red) 0%, var(--flag-red) 20%,
+    var(--flag-blue) 34%, var(--flag-blue) 47%,
+    var(--flag-yellow) 60%, var(--flag-yellow) 72%,
+    var(--flag-green) 85%, var(--flag-green) 100%); }
+/* En haut : transparent → la photo du hero passe derrière (immersif).
+   Au défilement : barre pleine, floutée et ombrée (intégrée). */
+.site-header.scrolled {
+  background: color-mix(in srgb, var(--color-bg) 94%, transparent);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom-color: var(--color-border);
+  box-shadow: 0 6px 24px rgba(20, 22, 58, 0.07);
+}
+/* Header pleine largeur, en 3 colonnes → logo à gauche, nav VRAIMENT centrée, langue à droite */
+.site-header .container { max-width: none; padding: 0 clamp(20px, 3.5vw, 52px); height: 100%;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
+.site-header .logo { justify-self: start; }
+.site-header .main-nav { justify-self: center; }
+.site-header .header-actions { justify-self: end; }
+
+/* --- État "en haut" (sur le hero) : logo, nav et actions en blanc --- */
+.site-header:not(.scrolled) .logo,
+.site-header:not(.scrolled) .logo .logo-name b { color: #fff; }
+.site-header:not(.scrolled) .lang-toggle { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.5); color: #fff; }
+.site-header:not(.scrolled) .nav-toggle span { background: #fff; }
+@media (min-width: 721px) {
+  .site-header:not(.scrolled) .main-nav a:not(.btn),
+  .site-header:not(.scrolled) .nav-ico { color: #fff; opacity: 1; }
+  .site-header:not(.scrolled) .main-nav .btn-primary { background: var(--flag-yellow); color: var(--flag-blue); }
+}
+
+.logo { display: flex; align-items: center; gap: 11px; font-family: var(--font-heading); font-weight: 700; font-size: 1.16rem; color: var(--color-text); }
+.logo .logo-mark {
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px;
+  background: var(--gradient-hero); color: #fff; font-size: 1.25rem;
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--color-primary) 40%, transparent);
+}
+.logo img.logo-img { height: 48px; width: auto; }
+.logo .logo-svg { height: 38px; width: auto; display: block; } /* texte = currentColor (s'adapte au fond) */
+.site-footer .logo .logo-svg { height: 40px; }
+.logo .logo-name b { color: var(--color-primary); }
+
+.main-nav { display: flex; align-items: center; gap: 30px; margin: 0 auto; } /* centré → aéré entre logo et actions */
+.main-nav a { color: var(--color-text); font-weight: 500; font-size: 0.95rem; position: relative; display: inline-flex; align-items: center; gap: 7px; }
+.main-nav a:not(.btn)::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px; border-radius: 2px; background: var(--gradient-sun); transition: width var(--transition); }
+.main-nav a:not(.btn):hover { color: var(--color-primary); }
+.main-nav a:not(.btn):hover::after { width: 100%; }
+/* Onglet ACTIF (= section où l'on se trouve) */
+.main-nav a.active:not(.btn) { font-weight: 700; }
+.main-nav a.active:not(.btn)::after { width: 100%; }
+.site-header.scrolled .main-nav a.active:not(.btn) { color: var(--color-primary); }
+.site-header.scrolled .main-nav a.active .nav-ico { color: var(--color-primary); opacity: 1; }
+/* Petites icônes de section */
+.nav-ico { display: inline-flex; color: var(--color-secondary); opacity: .8; transition: color var(--transition), opacity var(--transition); }
+.nav-ico svg { width: 17px; height: 17px; }
+.main-nav a:hover .nav-ico { color: var(--color-primary); opacity: 1; }
+
+.header-actions { display: flex; align-items: center; gap: 12px; }
+.lang-toggle {
+  font-family: var(--font-heading); font-weight: 600; font-size: 0.85rem;
+  border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text);
+  padding: 8px 15px; border-radius: 100px; cursor: pointer; transition: all var(--transition);
+}
+.lang-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); transform: translateY(-1px); }
+
+.nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
+.nav-toggle span { display: block; width: 24px; height: 2px; background: var(--color-text); margin: 5px 0; transition: var(--transition); border-radius: 2px; }
+
+
+/* ==========================================================================
+   7. BOUTONS
+   ========================================================================== */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-heading); font-weight: 600; font-size: 0.95rem;
+  padding: 14px 28px; border-radius: 100px; border: 2px solid transparent;
+  cursor: pointer; transition: all var(--transition); white-space: nowrap;
+}
+.btn-primary { background: var(--color-primary); color: var(--color-on-brand); }
+.btn-primary:hover { background: var(--color-text); color: #fff; transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+/* Bouton principal du hero : jaune drapeau plein, texte bleu marine (propre, contrasté) */
+.btn-accent { background: var(--flag-yellow); color: var(--flag-blue); font-weight: 700; box-shadow: 0 10px 26px rgba(0,0,0,.22); }
+.btn-accent:hover { background: #fff; color: var(--flag-blue); transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.btn-ghost { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.55); color: #fff; backdrop-filter: blur(4px); }
+.btn-ghost:hover { background: rgba(255,255,255,.22); color: #fff; transform: translateY(-3px); }
+
+
+/* ==========================================================================
+   8. HERO
+   ========================================================================== */
+.hero {
+  position: relative; overflow: hidden; color: #fff;
+  min-height: 100vh; min-height: 100dvh; /* dvh = hauteur visible réelle (mobile, sans bande) */
+  display: grid; align-items: center;
+  padding: 120px 0 90px;
+}
+/* Photo de fond (injectée en variable --hero-img par main.js) */
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: var(--hero-img); background-size: cover; background-position: center;
+  transform: scale(1.05);
+}
+/* Voile dégradé pour lisibilité + teinte de marque */
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(120deg, color-mix(in srgb, var(--color-primary) 82%, transparent), color-mix(in srgb, var(--color-secondary) 55%, transparent)),
+    linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.45));
+}
+/* Feuilles tropicales décoratives (subtiles, légère oscillation) */
+.hero-leaf { position: absolute; z-index: 1; color: #fff; opacity: .10; pointer-events: none; }
+.hero-leaf.leaf-1 { width: 320px; top: -60px; right: -70px; animation: swayA 9s ease-in-out infinite; }
+.hero-leaf.leaf-2 { width: 250px; bottom: -80px; left: -70px; animation: swayB 11s ease-in-out infinite; }
+@keyframes swayA { 0%,100% { transform: rotate(14deg) translateY(0); } 50% { transform: rotate(8deg) translateY(10px); } }
+@keyframes swayB { 0%,100% { transform: scaleX(-1) rotate(12deg) translateY(0); } 50% { transform: scaleX(-1) rotate(6deg) translateY(12px); } }
+
+.hero .container { position: relative; z-index: 3; max-width: 900px; text-align: center; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.34);
+  padding: 8px 18px; border-radius: 100px; font-weight: 600; font-size: 0.85rem;
+  margin-bottom: 26px; backdrop-filter: blur(6px);
+}
+.hero h1 { font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.22; margin-bottom: 22px; text-shadow: 0 4px 24px rgba(0,0,0,.28); }
+/* Mot clé « Fruit » : les lettres sont remplies d'une TEXTURE D'ANANAS
+   (background-clip: text) → le mot évoque littéralement le fruit.
+   Change l'image ci-dessous pour un autre fruit si besoin. */
+.hero h1 .grad {
+  font-weight: 800;
+  padding: 0 .04em;
+  /* Dégradé "fruité" (fraise → orange → ananas → citron vert) qui ondule en
+     boucle → le mot évoque littéralement des fruits mûrs, bien lisible. */
+  background-image: linear-gradient(100deg,
+    #ff3d6e 0%, #ff7a1a 25%, #ffd500 50%, #7ed321 75%, #ff3d6e 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.35));
+  animation: fruitFlow 5s ease-in-out infinite alternate;
+}
+@keyframes fruitFlow { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+@media (prefers-reduced-motion: reduce) { .hero h1 .grad { animation: none; } }
+.hero-subtitle { font-size: clamp(1rem, 2.2vw, 1.28rem); opacity: .96; max-width: 620px; margin: 0 auto 34px; }
+/* Accroche sous le titre : « EXPORTER OF FRESH EXOTIC FRUITS » */
+.hero-tagline { font-family: var(--font-heading); font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.16em; font-size: clamp(0.8rem, 1.7vw, 1rem); color: #fff; opacity: .95;
+  margin: 8px 0 32px; text-shadow: 0 2px 12px rgba(0,0,0,.4); }
+.hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+.hero-scroll { position: absolute; z-index: 3; bottom: 26px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 1.6rem; opacity: .85; animation: bounceArrow 1.8s ease-in-out infinite; }
+
+/* Carte photo "plantation" flottante — montre le fruit tout en gardant Maurice en fond */
+.hero-photo-card {
+  position: absolute; z-index: 2; left: 44px; bottom: 44px; width: 290px; margin: 0;
+  background: #fff; padding: 8px 8px 0; border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.4); --r: -3deg;
+  animation: floatY 6s ease-in-out infinite;
+}
+.hero-photo-card .hpc-img { height: 180px; background-size: cover; background-position: center; border-radius: 10px; background-color: var(--color-bg-alt); }
+.hero-photo-card .hpc-cap { font-family: var(--font-heading); font-weight: 600; font-size: .74rem; color: var(--color-text); text-align: center; padding: 8px 4px 6px; }
+@media (max-width: 1150px) { .hero-photo-card { display: none; } }
+
+
+/* ==========================================================================
+   10. STATISTIQUES (intégrées dans « À propos »)
+   Petites tuiles, chacune barrée d'une couleur du drapeau mauricien.
+   ========================================================================== */
+.about-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 44px; }
+.about-stat {
+  text-align: center; padding: 22px 12px 20px; background: var(--color-bg-alt);
+  border-radius: var(--radius-sm); position: relative; overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.about-stat:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.about-stat::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+.about-stat:nth-child(1)::before { background: var(--flag-red); }
+.about-stat:nth-child(2)::before { background: var(--flag-blue); }
+.about-stat:nth-child(3)::before { background: var(--flag-yellow); }
+.about-stat:nth-child(4)::before { background: var(--flag-green); }
+.about-stat .stat-icon  { font-size: 1.5rem; margin-bottom: 6px; line-height: 1; }
+.about-stat .stat-value { font-family: var(--font-heading); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.1rem); color: var(--flag-blue); line-height: 1; }
+.about-stat .stat-label { color: var(--color-text-soft); font-size: 0.8rem; margin-top: 7px; }
+
+
+/* ==========================================================================
+   11. À PROPOS
+   ========================================================================== */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.about-text h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 20px; }
+.about-text p { color: var(--color-text-soft); margin-bottom: 16px; }
+.about-points { list-style: none; margin-top: 26px; display: grid; gap: 14px; }
+.about-points li { display: flex; align-items: center; gap: 12px; font-weight: 500; }
+.about-points .check { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--gradient-sun); color: #fff; display: grid; place-items: center; font-size: 0.8rem; box-shadow: 0 6px 14px color-mix(in srgb, var(--color-accent-warm) 40%, transparent); }
+
+/* Visuel photo + carte flottante décorative */
+.about-visual { position: relative; }
+/* Carrousel de photos défilantes */
+.carousel { position: relative; width: 100%; height: 460px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-hover); background: var(--color-bg-alt); }
+.carousel-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transform: scale(1.05); transition: opacity 1.1s ease, transform 6.5s ease; }
+.carousel-slide.active { opacity: 1; transform: scale(1); }
+.carousel-dots { position: absolute; top: 14px; right: 14px; display: flex; justify-content: flex-end; gap: 8px; z-index: 3; }
+.carousel-dots button { width: 9px; height: 9px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; background: rgba(255,255,255,.55); transition: all var(--transition); }
+.carousel-dots button:hover { background: rgba(255,255,255,.85); }
+.carousel-dots button.active { background: #fff; width: 26px; border-radius: 100px; }
+.about-visual .float-card {
+  position: absolute; bottom: -22px; left: -22px; background: var(--color-surface);
+  border-radius: var(--radius-sm); padding: 16px 20px; box-shadow: var(--shadow-hover);
+  display: flex; align-items: center; gap: 12px; animation: floatY 5s ease-in-out infinite;
+}
+.about-visual .float-card .fc-emoji { font-size: 1.8rem; }
+.about-visual .float-card b { font-family: var(--font-heading); display: block; }
+.about-visual .float-card span { font-size: 0.82rem; color: var(--color-text-soft); }
+
+
+/* ==========================================================================
+   12. PRODUCTEURS + FENÊTRE (modal)
+   ========================================================================== */
+.producers { position: relative; overflow: hidden; }
+.producers-bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; opacity: .10; }
+.producers > .container { position: relative; z-index: 1; }
+
+.producers-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 28px; }
+.feature { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 20px 22px; text-align: center; transition: transform var(--transition), box-shadow var(--transition); }
+.feature:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+.feature .feature-icon { font-size: 1.6rem; width: 50px; height: 50px; border-radius: 14px; margin: 0 auto 12px; display: grid; place-items: center; background: var(--gradient-sun); }
+.feature h3 { margin-bottom: 6px; font-size: 1.1rem; }
+.feature p { color: var(--color-text-soft); font-size: 0.9rem; }
+
+.producers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.producer-card {
+  position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer;
+  box-shadow: var(--shadow); min-height: 256px; display: flex; align-items: flex-end;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.producer-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+.producer-card .pc-img { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .5s ease; }
+.producer-card:hover .pc-img { transform: scale(1.07); }
+.producer-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,20,16,.9) 8%, rgba(8,20,16,.35) 45%, transparent 75%); }
+.producer-card .pc-body { position: relative; z-index: 1; padding: 24px; color: #fff; width: 100%; }
+.producer-card .pc-region { display: inline-block; font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; background: var(--gradient-sun); color: #fff; padding: 4px 12px; border-radius: 100px; margin-bottom: 12px; }
+.producer-card h3 { font-size: 1.3rem; margin-bottom: 6px; }
+.producer-card .pc-short { font-size: 0.92rem; opacity: .9; }
+.producer-card .pc-more { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-family: var(--font-heading); font-weight: 600; font-size: 0.88rem; color: var(--color-accent); }
+.producer-card .pc-more::after { content: "→"; transition: transform var(--transition); }
+.producer-card:hover .pc-more::after { transform: translateX(5px); }
+
+/* --- Fenêtre détaillée (modal) --- */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 300; display: none; align-items: center; justify-content: center;
+  padding: 24px; background: rgba(10, 22, 18, .62); backdrop-filter: blur(6px);
+}
+.modal-overlay.is-open { display: flex; }
+.modal {
+  background: var(--color-surface); border-radius: var(--radius); overflow: hidden;
+  width: min(860px, 100%); max-height: 90vh; display: grid; grid-template-columns: 42% 58%;
+  box-shadow: var(--shadow-hover); animation: popIn .32s cubic-bezier(.22,.61,.36,1); position: relative;
+}
+.modal-img { background-size: cover; background-position: center; min-height: 320px; }
+.modal-body { padding: 34px; overflow-y: auto; }
+.modal-region { display: inline-block; font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #fff; background: var(--gradient-sun); padding: 4px 12px; border-radius: 100px; margin-bottom: 14px; }
+.modal-body h3 { font-size: 1.6rem; margin-bottom: 14px; }
+.modal-body p { color: var(--color-text-soft); margin-bottom: 20px; }
+.modal-meta { display: flex; gap: 28px; margin-bottom: 22px; }
+.modal-meta .mm-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--color-text-soft); }
+.modal-meta .mm-value { font-family: var(--font-heading); font-weight: 700; font-size: 1.15rem; color: var(--color-primary); }
+.modal-specialties .ms-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--color-text-soft); margin-bottom: 8px; }
+.modal-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.modal-tags span { font-size: 0.82rem; font-weight: 600; padding: 6px 14px; border-radius: 100px; background: color-mix(in srgb, var(--color-primary) 12%, transparent); color: var(--color-primary); }
+.modal-close {
+  position: absolute; top: 14px; right: 14px; z-index: 2; width: 40px; height: 40px; border-radius: 50%;
+  border: 0; cursor: pointer; background: rgba(255,255,255,.9); color: var(--color-text); font-size: 1.2rem; line-height: 1;
+  display: grid; place-items: center; transition: transform var(--transition); box-shadow: var(--shadow);
+}
+.modal-close:hover { transform: rotate(90deg); }
+
+
+/* ==========================================================================
+   13. PRODUITS (cartes photo)
+   ========================================================================== */
+.products-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 36px; }
+.product-card {
+  position: relative; width: 400px; max-width: 100%;
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius); overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+.product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: color-mix(in srgb, var(--color-primary) 35%, transparent); }
+.product-media { position: relative; height: 260px; overflow: hidden; }
+.product-media .pm-img { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .5s ease; }
+.product-card:hover .product-media .pm-img { transform: scale(1.08); }
+.product-media .pm-emoji { position: absolute; bottom: -18px; left: 18px; z-index: 2; width: 44px; height: 44px; border-radius: 12px; background: var(--color-surface); display: grid; place-items: center; font-size: 1.3rem; box-shadow: var(--shadow); }
+.product-tag { position: absolute; top: 12px; right: 12px; z-index: 2; font-size: 0.66rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #fff; background: var(--gradient-sun); padding: 5px 11px; border-radius: 100px; }
+.product-body { padding: 26px 22px 24px; }
+.product-body h3 { font-size: 1.18rem; margin-bottom: 10px; }
+/* Saison + poids (empilés) */
+.product-specs { display: grid; gap: 10px; }
+.product-meta { font-size: 0.92rem; color: var(--color-text); font-weight: 600; }
+.product-meta .pm-label { display: block; color: var(--color-text-soft); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 1px; }
+.product-desc { font-size: 0.92rem; color: var(--color-text-soft); }
+
+
+/* ==========================================================================
+   14. POURQUOI MAURICE → FRANCE
+   ========================================================================== */
+.why { position: relative; overflow: hidden; color: #fff; }
+.why-bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; }
+.why-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 92%, transparent), color-mix(in srgb, var(--color-secondary) 78%, transparent)); }
+.why > .container { position: relative; z-index: 2; }
+.why .kicker { background: rgba(255,255,255,.18); box-shadow: none; }
+.why .section-head h2 { color: #fff; }
+.why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.why-card {
+  display: flex; gap: 18px; align-items: flex-start; background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius); padding: 28px; backdrop-filter: blur(6px);
+  transition: transform var(--transition), background var(--transition);
+}
+.why-card:hover { transform: translateY(-5px); background: rgba(255,255,255,.16); }
+.why-card .why-num { flex: none; width: 50px; height: 50px; border-radius: 14px; background: var(--gradient-sun); color: #fff; display: grid; place-items: center; font-family: var(--font-heading); font-weight: 700; font-size: 1.15rem; }
+.why-card h3 { font-size: 1.22rem; margin-bottom: 6px; color: #fff; }
+.why-card p { color: rgba(255,255,255,.88); font-size: 0.95rem; }
+
+
+/* ==========================================================================
+   15. CONTACT
+   ========================================================================== */
+.contact-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; }
+/* Home : bloc coordonnées centré (le formulaire est sur inquiry.html) */
+.contact-single { display: flex; justify-content: center; }
+.contact-single .contact-info { max-width: 460px; width: 100%; }
+.contact-info .btn { margin-top: 22px; position: relative; z-index: 1; }
+.contact-form { display: grid; gap: 18px; }
+.field { display: grid; gap: 6px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.field select { font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 13px 15px; }
+.field select:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 15%, transparent); }
+/* Pages secondaires (inquiry) : le contenu passe sous le header fixe */
+.subpage-section { padding-top: calc(var(--header-height) + clamp(40px, 6vh, 80px)); }
+.inquiry-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: stretch; max-width: 980px; margin: 0 auto; }
+/* Carte "coordonnées" de la page inquiry : plus soignée et équilibrée
+   → occupe toute la hauteur du formulaire, infos aérées et séparées d'un filet. */
+.inquiry-grid .contact-info { display: flex; flex-direction: column; }
+.inquiry-grid .contact-info h3 { padding-bottom: 18px; margin-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,.22); }
+.inquiry-grid .contact-info .info-item { margin-bottom: 0; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,.14); }
+.inquiry-grid .contact-info .info-item:last-child { border-bottom: 0; }
+.inquiry-grid .contact-info .info-item .info-label { opacity: .7; margin-bottom: 4px; }
+.inquiry-grid .contact-info .info-item a,
+.inquiry-grid .contact-info .info-item span { font-size: 1.02rem; }
+.field label { font-weight: 600; font-size: 0.9rem; }
+.field input, .field textarea {
+  font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text);
+  background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+  padding: 13px 15px; transition: border-color var(--transition), box-shadow var(--transition);
+}
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 15%, transparent); }
+.field textarea { resize: vertical; min-height: 130px; }
+
+.contact-info { background: var(--gradient-hero); color: #fff; border-radius: var(--radius); padding: 38px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+.contact-info::after { content: ""; position: absolute; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,.12); top: -70px; right: -60px; }
+.contact-info h3 { margin-bottom: 24px; font-size: 1.32rem; position: relative; z-index: 1; }
+.contact-info .info-item { margin-bottom: 20px; position: relative; z-index: 1; }
+.contact-info .info-item .info-label { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.82; margin-bottom: 2px; }
+.contact-info .info-item a, .contact-info .info-item span { color: #fff; font-weight: 500; }
+.contact-info .info-item a:hover { text-decoration: underline; }
+
+
+/* ==========================================================================
+   16. FOOTER
+   ========================================================================== */
+.site-footer { background: var(--color-text); color: rgba(255,255,255,0.8); padding: 68px 0 28px; }
+.footer-grid { display: grid; grid-template-columns: 1.8fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-brand .logo { color: #fff; margin-bottom: 14px; }
+.footer-brand .logo .logo-name b { color: var(--color-accent); }
+.footer-brand p { font-size: 0.92rem; max-width: 280px; }
+.site-footer h4 { color: #fff; font-size: 0.92rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
+.site-footer ul { list-style: none; display: grid; gap: 10px; }
+.site-footer ul a, .site-footer ul span { color: rgba(255,255,255,0.75); font-size: 0.92rem; }
+.site-footer ul a:hover { color: var(--color-accent); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 0.85rem; }
+
+
+/* ==========================================================================
+   17. NAVIGATION ASSISTÉE (scroll-snap + points latéraux)
+   ========================================================================== */
+/* Scroll "aidé" : chaque section s'aligne à l'écran (desktop uniquement) */
+@media (min-width: 861px) {
+  html { scroll-snap-type: y proximity; }
+  main > section, .hero { scroll-snap-align: start; scroll-snap-stop: normal; }
+}
+
+/* Points de navigation latéraux (à droite) */
+.section-nav {
+  position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 90;
+  display: flex; flex-direction: column; gap: 14px; align-items: center;
+}
+.sn-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: rgba(140, 146, 168, 0.6); border: 1.5px solid rgba(255,255,255,0.7);
+  transition: all var(--transition); position: relative; box-shadow: 0 1px 4px rgba(0,0,0,.18);
+}
+.sn-dot:hover { transform: scale(1.25); }
+.sn-dot.active {
+  background: var(--flag-yellow); border-color: #fff;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--flag-yellow) 30%, transparent);
+}
+.sn-label {
+  position: absolute; right: 22px; top: 50%; transform: translateY(-50%);
+  white-space: nowrap; background: var(--color-text); color: #fff;
+  font-size: 0.72rem; font-weight: 600; padding: 5px 11px; border-radius: 100px;
+  opacity: 0; pointer-events: none; transition: opacity var(--transition);
+}
+.sn-dot:hover .sn-label { opacity: 1; }
+@media (max-width: 860px) { .section-nav { display: none; } }
+
+
+/* ==========================================================================
+   18. RESPONSIVE
+   ========================================================================== */
+@media (max-width: 960px) {
+  .about-grid, .contact-grid, .inquiry-grid { grid-template-columns: 1fr; gap: 44px; }
+  .carousel { height: 360px; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .producers-grid, .producers-features { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .modal { grid-template-columns: 1fr; max-height: 92vh; }
+  .modal-img { min-height: 200px; }
+}
+
+@media (max-width: 720px) {
+  section { min-height: auto; padding: clamp(56px, 9vh, 88px) 0; }
+  .hero { min-height: 100dvh; }
+
+  /* Header mobile : logo à gauche, actions (langue + menu) à droite */
+  .site-header .container { grid-template-columns: 1fr auto; gap: 12px; }
+  .site-header .header-actions { justify-self: end; }
+
+  .nav-toggle { display: block; }
+  /* Menu déroulant : panneau pleine largeur, propre et arrondi en bas */
+  .main-nav {
+    position: fixed; top: var(--header-height); left: 0; right: 0; bottom: auto;
+    width: 100%; flex-direction: column; align-items: stretch; gap: 0; margin: 0;
+    background: var(--color-surface); padding: 6px 0 8px;
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 18px 40px rgba(20, 22, 58, .16);
+    opacity: 0; visibility: hidden; transform: translateY(-8px);
+    transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+  }
+  .main-nav.is-open { opacity: 1; visibility: visible; transform: none; }
+  .main-nav a:not(.btn) { padding: 15px 24px; border-bottom: 1px solid var(--color-border); color: var(--color-text); }
+  .main-nav a:not(.btn):last-child { border-bottom: 0; }
+  .main-nav a:not(.btn)::after { display: none; }
+  .main-nav .nav-ico { color: var(--color-primary); opacity: 1; }
+  .main-nav .btn { margin: 12px 24px 4px; justify-content: center; }
+  .about-stats { grid-template-columns: repeat(2, 1fr); }
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .modal-meta { gap: 20px; }
+
+  /* Page inquiry : formulaire puis carte contact empilés, plus compacts */
+  .inquiry-grid { gap: 28px; }
+  .field-row { grid-template-columns: 1fr; gap: 16px; }
+  .contact-info { padding: 26px 22px; }
+  .contact-info h3 { margin-bottom: 18px; }
+  .contact-info .info-item { margin-bottom: 16px; }
+  .contact-info::after { width: 150px; height: 150px; top: -55px; right: -45px; }
+}
+
+@media (max-width: 440px) {
+  .products-grid { grid-template-columns: 1fr; }
+}
+
+/* Respect des préférences de mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .reveal, .stagger > * { opacity: 1 !important; transform: none !important; }
+}
+
+/* ==========================================================================
+   19. NOTICES DU FORMULAIRE (thème WordPress)
+   ========================================================================== */
+.form-notice { max-width: 720px; margin: 0 auto 24px; padding: 14px 20px; border-radius: var(--radius-sm); font-weight: 600; text-align: center; }
+.form-notice--ok { background: color-mix(in srgb, var(--flag-green) 16%, #fff); color: var(--flag-green); border: 1px solid color-mix(in srgb, var(--flag-green) 40%, transparent); }
+.form-notice--error { background: color-mix(in srgb, var(--flag-red) 12%, #fff); color: var(--flag-red); border: 1px solid color-mix(in srgb, var(--flag-red) 40%, transparent); }
