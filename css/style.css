@@ -219,7 +219,7 @@ section {
   background: var(--gradient-hero); color: #fff; font-size: 1.25rem;
   box-shadow: 0 6px 16px color-mix(in srgb, var(--color-primary) 40%, transparent);
 }
-.logo img.logo-img { height: 40px; width: auto; }
+.logo img.logo-img { height: 48px; width: auto; }
 .logo .logo-svg { height: 38px; width: auto; display: block; } /* texte = currentColor (s'adapte au fond) */
 .site-footer .logo .logo-svg { height: 40px; }
 .logo .logo-name b { color: var(--color-primary); }
