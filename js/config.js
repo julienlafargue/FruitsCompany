@@ -15,8 +15,8 @@ const SITE_CONFIG = {
     tagline: "Exporter of fresh exotic fruits",
     // Logo : "image" (ton fichier, ci-dessous) | "svg" (dessin de secours) | "text"
     // ⭐ Dépose ton vrai logo (PNG/SVG à fond TRANSPARENT) sous ce chemin :
-    logoMode: "svg",
-    logoImage: "assets/logo.png",      // ← ajoute ce fichier puis repasse logoMode à "image"
+    logoMode: "image",
+    logoImage: "assets/logo2.png",
     // Logo vectoriel Chi-Agri : le texte suit la couleur (currentColor), le
     // globe garde ses couleurs. Remplaçable par ton vrai fichier (voir README).
     logoSvg: `<svg class="logo-svg" viewBox="0 0 372 88" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chi-Agri">
