@@ -37,7 +37,7 @@ function chi_lang() {
 	if ( isset( $_COOKIE['chi_lang'] ) && in_array( $_COOKIE['chi_lang'], array( 'en', 'fr' ), true ) ) {
 		return $_COOKIE['chi_lang'];
 	}
-	$def = chi_field( 'default_lang', 'en', 'option' );
+	$def = chi_opt( 'default_lang', 'en' );
 	return 'fr' === $def ? 'fr' : 'en';
 }
 
@@ -154,7 +154,7 @@ function chi_text_defaults() {
  */
 function chi_txt( $key ) {
 	$lang = chi_lang();
-	$val  = chi_field( 'txt_' . $key . '_' . $lang, '', 'option' );
+	$val  = chi_opt( 'txt_' . $key . '_' . $lang, '' );
 	if ( '' !== $val ) {
 		return $val;
 	}
@@ -200,11 +200,11 @@ function chi_image_url( $src, $w = 1200, $h = 0 ) {
  */
 function chi_contact() {
 	return array(
-		'person'  => chi_field( 'contact_person', 'Jaysen Chinapyel', 'option' ),
-		'role'    => chi_field( 'contact_role', 'Director', 'option' ),
-		'email'   => chi_field( 'contact_email', 'chiagri_Mauritius@gmail.com', 'option' ),
-		'phone'   => chi_field( 'contact_phone', '+230 57803810', 'option' ),
-		'address' => chi_field( 'contact_address', 'Sanashee Towers, Reserve Street, Port Louis, Mauritius', 'option' ),
+		'person'  => chi_opt( 'contact_person', 'Jaysen Chinapyel' ),
+		'role'    => chi_opt( 'contact_role', 'Director' ),
+		'email'   => chi_opt( 'contact_email', 'chiagri_Mauritius@gmail.com' ),
+		'phone'   => chi_opt( 'contact_phone', '+230 57803810' ),
+		'address' => chi_opt( 'contact_address', 'Sanashee Towers, Reserve Street, Port Louis, Mauritius' ),
 	);
 }
 
@@ -223,22 +223,22 @@ function chi_stats() {
 		array( 'value' => 100, 'suffix' => '%', 'icon' => '📍', 'label' => 'en' === $lang ? 'Traceable to the plot' : "Traçable jusqu'à la parcelle" ),
 	);
 
-	$rows = chi_field( 'stats', array(), 'option' );
-	if ( empty( $rows ) || ! is_array( $rows ) ) {
-		return $default;
-	}
-
+	// 4 blocs fixes (champs gratuits : le Répéteur est réservé à ACF PRO).
 	$out = array();
-	foreach ( $rows as $r ) {
-		$label = isset( $r[ 'label_' . $lang ] ) ? $r[ 'label_' . $lang ] : ( isset( $r['label_en'] ) ? $r['label_en'] : '' );
+	for ( $i = 1; $i <= 4; $i++ ) {
+		$value = chi_opt( 'stat_' . $i . '_value', '' );
+		$label = chi_opt( 'stat_' . $i . '_label_' . $lang, '' );
+		if ( '' === $value && '' === $label ) {
+			continue; // bloc vide → ignoré.
+		}
 		$out[] = array(
-			'value'  => isset( $r['value'] ) ? $r['value'] : 0,
-			'suffix' => isset( $r['suffix'] ) ? $r['suffix'] : '',
-			'icon'   => isset( $r['icon'] ) ? $r['icon'] : '',
+			'value'  => '' === $value ? 0 : $value,
+			'suffix' => chi_opt( 'stat_' . $i . '_suffix', '' ),
+			'icon'   => chi_opt( 'stat_' . $i . '_icon', '' ),
 			'label'  => $label,
 		);
 	}
-	return $out;
+	return empty( $out ) ? $default : $out;
 }
 
 /**
@@ -253,19 +253,15 @@ function chi_about_slides() {
 		'photo-1502009285422-74e42ac2fd68',
 		'photo-1562157244-acec728ea5b2',
 	);
-	$slides = chi_field( 'about_slides', array(), 'option' );
-	if ( empty( $slides ) || ! is_array( $slides ) ) {
-		return $default;
+	// 5 champs image (la Galerie est réservée à ACF PRO).
+	$slides = array();
+	for ( $i = 1; $i <= 5; $i++ ) {
+		$img = chi_opt( 'slide_' . $i, '' );
+		if ( ! empty( $img ) ) {
+			$slides[] = $img;
+		}
 	}
-	return array_map(
-		function ( $s ) {
-			if ( is_array( $s ) && isset( $s['ID'] ) ) {
-				return (int) $s['ID'];
-			}
-			return $s;
-		},
-		$slides
-	);
+	return empty( $slides ) ? $default : $slides;
 }
 
 /**
@@ -274,5 +270,5 @@ function chi_about_slides() {
  * @return string
  */
 function chi_hero_image() {
-	return chi_field( 'hero_image', 'photo-1513415277900-a62401e19be4', 'option' );
+	return chi_opt( 'hero_image', 'photo-1513415277900-a62401e19be4' );
 }

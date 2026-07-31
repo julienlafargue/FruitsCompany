@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'CHI_AGRI_VERSION', '1.0.0' );
 
 require_once get_theme_file_path( 'inc/helpers.php' );
+require_once get_theme_file_path( 'inc/settings.php' );
 require_once get_theme_file_path( 'inc/cpt-products.php' );
 require_once get_theme_file_path( 'inc/acf-fields.php' );
 require_once get_theme_file_path( 'inc/inquiry-form.php' );
@@ -23,18 +24,22 @@ add_action( 'after_switch_theme', 'chi_provision_pages' );
  * thème, sans dépendre de l'outil de dev mu-plugins/chi-seed.php.
  */
 function chi_provision_pages() {
-	if ( get_page_by_path( 'inquiry' ) ) {
-		return;
+	// Fiche de réglages (menu « Chi-Agri »).
+	if ( function_exists( 'chi_settings_id' ) ) {
+		chi_settings_id( true );
 	}
-	wp_insert_post(
-		array(
-			'post_title'   => 'Inquiry',
-			'post_name'    => 'inquiry',
-			'post_status'  => 'publish',
-			'post_type'    => 'page',
-			'post_content' => '',
-		)
-	);
+	// Page « Inquiry ».
+	if ( ! get_page_by_path( 'inquiry' ) ) {
+		wp_insert_post(
+			array(
+				'post_title'   => 'Inquiry',
+				'post_name'    => 'inquiry',
+				'post_status'  => 'publish',
+				'post_type'    => 'page',
+				'post_content' => '',
+			)
+		);
+	}
 }
 
 /* --- Supports du thème ----------------------------------------------------- */

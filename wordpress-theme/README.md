@@ -10,12 +10,16 @@ avec un **contenu entièrement éditable** depuis l'admin WordPress et un suppor
 |---|---|
 | Logo header | Apparence → Personnaliser → Identité du site (logo) |
 | Logo footer (texte blanc) | fourni dans le thème (`assets/img/logo-footer.png`) |
-| Coordonnées (contact, email, tél, adresse) | Menu **Chi-Agri** (page d'options ACF) |
-| Image du hero + carrousel « À propos » | Menu **Chi-Agri** |
-| Chiffres clés (2+, 48h, 100%…) | Menu **Chi-Agri** → répéteur « Chiffres clés » |
+| Coordonnées (contact, email, tél, adresse) | Menu **Chi-Agri** → onglet « Général » |
+| Image du hero + carrousel « À propos » | Menu **Chi-Agri** → onglet « Images » |
+| Chiffres clés (2+, 48h, 100%…) | Menu **Chi-Agri** → onglet « Chiffres clés » |
 | Produits (nom, photo, saison, poids, description) | Menu **Produits** (chaque produit = 1 fiche) |
-| **Tous les textes** (titres, paragraphes, boutons, formulaire) en **EN et FR** | menu **« Chi-Agri » → onglet « Textes »** |
+| **Tous les textes** (titres, paragraphes, boutons, formulaire) en **EN et FR** | Menu **Chi-Agri** → onglet « Textes » |
 | Formulaire de demande | fonctionne d'origine (envoi email `wp_mail`) |
+
+> ⚙️ Le menu **« Chi-Agri »** ouvre directement la fiche « Réglages du site ».
+> **ACF gratuit suffit** — le thème n'utilise aucune fonctionnalité ACF PRO
+> (pas de page d'options, ni de répéteur, ni de galerie).
 
 > Le thème affiche le **contenu actuel par défaut** même sans rien configurer :
 > chaque champ retombe sur la valeur du site statique.
@@ -32,8 +36,10 @@ Les produits ont aussi des champs **Nom / Saison / Description** en EN et FR.
 
 ## Plugins requis / recommandés (gratuits)
 
-- **Advanced Custom Fields** — *requis* pour éditer le contenu (sinon, le thème
-  affiche les valeurs par défaut mais rien n'est modifiable dans l'admin)
+- **Advanced Custom Fields** (version **gratuite**, par WP Engine) — *requis* pour
+  éditer le contenu. Sans lui, le site s'affiche avec les valeurs par défaut mais
+  rien n'est modifiable dans l'admin. ⚠️ Ne PAS confondre avec l'add-on
+  « ACF: CommonMark » (inutile ici).
 - (optionnel) **Yoast SEO** ou **Rank Math** — balises SEO
 
 > Polylang n'est **plus nécessaire** : le bilingue est intégré au thème.
